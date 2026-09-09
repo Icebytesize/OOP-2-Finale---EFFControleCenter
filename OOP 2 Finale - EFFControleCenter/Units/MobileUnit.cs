@@ -1,8 +1,9 @@
-﻿using System;
+﻿using OOP_2_Finale___EFFControleCenter.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OOP_2_Finale___EFFControleCenter.Models
+namespace OOP_2_Finale___EFFControleCenter.Units
 {
     public abstract class MobileUnit
     {
