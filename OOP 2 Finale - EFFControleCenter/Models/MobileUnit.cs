@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace OOP_2_Finale___EFFControleCenter.MobileUnits
+namespace OOP_2_Finale___EFFControleCenter.Models
 {
     public abstract class MobileUnit
     {
@@ -51,10 +51,15 @@ namespace OOP_2_Finale___EFFControleCenter.MobileUnits
             ArgumentNullException.ThrowIfNull(pilot);
 
             AssignedPilot = pilot;
+            pilot.AssignUnit(this);
         }
 
         public void RemovePilot()
         {
+            if (AssignedPilot != null)
+            {
+                AssignedPilot.RemoveUnit();
+            }
             AssignedPilot = null;
         }
 
@@ -67,5 +72,7 @@ namespace OOP_2_Finale___EFFControleCenter.MobileUnits
 
             IsAvaible = false;
         }
+
+        public abstract string GetDescription();
     }
 }
