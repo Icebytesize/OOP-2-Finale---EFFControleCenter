@@ -152,7 +152,7 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
 
         private async void toolStripMenuSquad_Click(object sender, EventArgs e)
         {
-            if ( _controlCenter == null) return;
+            if (_controlCenter == null) return;
 
             using CreateSquadForm createForm = new CreateSquadForm(_controlCenter);
 
@@ -169,6 +169,28 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
                 await SquadJsonService.AppendSquadsToJson("squads.json", new List<Squad> { newSquad });
 
                 MessageBox.Show($"{newSquad.Name} created successfully.");
+            }
+        }
+
+        private async void toolStripMenuMission_Click(object sender, EventArgs e)
+        {
+            if( _controlCenter == null) return;
+
+            using CreateMissionForm createForm = new CreateMissionForm(_controlCenter);
+
+            if (createForm.ShowDialog() == DialogResult.OK && createForm.CreatedMission != null)
+            {
+                Mission newMission = createForm.CreatedMission;
+
+                int nextId = await JsonService.GetNextId<MissionData>("missions.json");
+
+                newMission.Id = nextId;
+
+                _controlCenter.AddMission(newMission);
+
+                await MissionJsonService.AppendMissionsToJson("missions.json", new List<Mission> { newMission });
+
+                MessageBox.Show($"{newMission.Name} created successfully.");
             }
         }
     }

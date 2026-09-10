@@ -95,6 +95,7 @@
             toolStripMenuMission.Name = "toolStripMenuMission";
             toolStripMenuMission.Size = new Size(180, 22);
             toolStripMenuMission.Text = "Mission";
+            toolStripMenuMission.Click += toolStripMenuMission_Click;
             // 
             // toolStripMenuWeapon
             // 
