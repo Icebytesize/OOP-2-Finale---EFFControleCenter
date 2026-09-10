@@ -21,7 +21,16 @@ namespace OOP_2_Finale___EFFControleCenter.Services
             await JsonService.OverwriteJson(fileName, unitData);
         }
 
-        public static async Task<List<MobileUnit>> LoadUnitsFromJson(string fileName)
+        /// <summary>
+        /// Loads mobile units from a JSON file and recreates the correct concrete unit types.
+        /// It also restores pilot and weapon relationships by matching the stored IDs
+        /// with the already loaded pilots and weapons.
+        /// </summary>
+        /// <param name="fileName">The JSON file containing the mobile unit data.</param>
+        /// <param name="allPilots">All loaded pilots used to restore pilot assignments.</param>
+        /// <param name="allWeapons">All loaded weapons used to restore unit loadouts.</param>
+        /// <returns>A list of recreated mobile units with their relationships restored.</returns>
+        public static async Task<List<MobileUnit>> LoadUnitsFromJson(string fileName, List<Pilot> allPilots, List<Weapon> allWeapons)
         {
             List<MobileUnitData> unitData = await JsonService.LoadFromJson<MobileUnitData>(fileName);
 
@@ -29,6 +38,7 @@ namespace OOP_2_Finale___EFFControleCenter.Services
 
             foreach (MobileUnitData data in unitData)
             {
+                // Recreate the correct concrete MobileUnit type from the saved type name.
                 MobileUnit unit = data.Type switch
                 {
                     "GM" => new GM(),
@@ -42,11 +52,34 @@ namespace OOP_2_Finale___EFFControleCenter.Services
 
                 unit.Id = data.Id;
 
+                if (data.PilotId.HasValue)
+                {
+                    Pilot? pilot = allPilots.Find(p => p.Id == data.PilotId.Value);
+                    if (pilot != null)
+                    {
+                        unit.AssignPilot(pilot);
+                    }
+                }
+
+                if (unit is MobileWeapon mobileWeapon)
+                {
+                    foreach (int weaponId in data.WeaponIds)
+                    {
+                        Weapon? weapon = allWeapons.Find(w => w.Id == weaponId);
+
+                        if (weapon != null)
+                        {
+                            mobileWeapon.AddWeapon(weapon);
+                        }
+                    }
+                }
+
                 units.Add(unit);
             }
 
             return units;
         }
+
         public static async Task AppendUnitsToJson(string fileName, List<MobileUnit> newUnits)
         {
             ArgumentNullException.ThrowIfNull(newUnits);
