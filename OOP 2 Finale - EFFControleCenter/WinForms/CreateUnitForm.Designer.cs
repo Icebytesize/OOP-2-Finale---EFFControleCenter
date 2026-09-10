@@ -34,11 +34,12 @@
             txtUnitName = new TextBox();
             lblUnitName = new Label();
             lblUnitType = new Label();
+            lblCreateUnit = new Label();
             SuspendLayout();
             // 
             // btnCreate
             // 
-            btnCreate.Location = new Point(283, 345);
+            btnCreate.Location = new Point(60, 343);
             btnCreate.Name = "btnCreate";
             btnCreate.Size = new Size(75, 23);
             btnCreate.TabIndex = 0;
@@ -48,7 +49,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(389, 345);
+            btnCancel.Location = new Point(169, 343);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(75, 23);
             btnCancel.TabIndex = 1;
@@ -59,14 +60,14 @@
             // comboBoxUnitType
             // 
             comboBoxUnitType.FormattingEnabled = true;
-            comboBoxUnitType.Location = new Point(318, 102);
+            comboBoxUnitType.Location = new Point(106, 155);
             comboBoxUnitType.Name = "comboBoxUnitType";
             comboBoxUnitType.Size = new Size(121, 23);
             comboBoxUnitType.TabIndex = 2;
             // 
             // txtUnitName
             // 
-            txtUnitName.Location = new Point(318, 52);
+            txtUnitName.Location = new Point(106, 105);
             txtUnitName.Name = "txtUnitName";
             txtUnitName.Size = new Size(121, 23);
             txtUnitName.TabIndex = 3;
@@ -74,7 +75,7 @@
             // lblUnitName
             // 
             lblUnitName.AutoSize = true;
-            lblUnitName.Location = new Point(270, 55);
+            lblUnitName.Location = new Point(58, 108);
             lblUnitName.Name = "lblUnitName";
             lblUnitName.Size = new Size(42, 15);
             lblUnitName.TabIndex = 4;
@@ -83,17 +84,28 @@
             // lblUnitType
             // 
             lblUnitType.AutoSize = true;
-            lblUnitType.Location = new Point(277, 105);
+            lblUnitType.Location = new Point(65, 158);
             lblUnitType.Name = "lblUnitType";
             lblUnitType.Size = new Size(35, 15);
             lblUnitType.TabIndex = 5;
             lblUnitType.Text = "Type:";
             // 
+            // lblCreateUnit
+            // 
+            lblCreateUnit.AutoSize = true;
+            lblCreateUnit.Font = new Font("Segoe UI", 18F);
+            lblCreateUnit.Location = new Point(83, 18);
+            lblCreateUnit.Name = "lblCreateUnit";
+            lblCreateUnit.Size = new Size(134, 32);
+            lblCreateUnit.TabIndex = 6;
+            lblCreateUnit.Text = "Create Unit";
+            // 
             // CreateUnitForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(300, 450);
+            Controls.Add(lblCreateUnit);
             Controls.Add(lblUnitType);
             Controls.Add(lblUnitName);
             Controls.Add(txtUnitName);
@@ -114,5 +126,6 @@
         private TextBox txtUnitName;
         private Label lblUnitName;
         private Label lblUnitType;
+        private Label lblCreateUnit;
     }
 }

@@ -20,7 +20,7 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
         {
             InitializeComponent();
 
-            dataGridViewUnits.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //dataGridViewUnits.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             Load += MainForm_Load;
         }
@@ -29,10 +29,10 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
         {
             _controlCenter = await DataLoader.LoadAllData();
 
-            RefreshUnitsGrid();
+            //RefreshUnitsGrid();
         }
 
-        private void RefreshUnitsGrid()
+        /*private void RefreshUnitsGrid()
         {
             if (_controlCenter == null) return;
 
@@ -47,9 +47,41 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
                 Squad = unit.AssignedSquad?.Name ?? "None"
             })
                 .ToList();
-        }
+        } */
 
         private async void btnCreateUnit_Click(object sender, EventArgs e)
+        {
+            contextMenuStripCreate.Show(
+            btnCreate,
+            new Point(0, btnCreate.Height));
+            /* if (_controlCenter == null)
+                return;
+
+            using CreateUnitForm createForm = new CreateUnitForm();
+
+            if (createForm.ShowDialog() == DialogResult.OK &&
+                createForm.CreatedUnit != null)
+            {
+                MobileUnit newUnit = createForm.CreatedUnit;
+
+                int nextId = await JsonService.GetNextId<MobileUnitData>("units.json");
+
+                newUnit.Id = nextId;
+
+                _controlCenter.AddUnit(newUnit);
+
+                await UnitJsonService.AppendUnitsToJson("units.json", new List<MobileUnit> { newUnit });
+
+                RefreshUnitsGrid(); 
+            } */
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             if (_controlCenter == null)
                 return;
@@ -69,8 +101,18 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
 
                 await UnitJsonService.AppendUnitsToJson("units.json", new List<MobileUnit> { newUnit });
 
-                RefreshUnitsGrid();
+
             }
+        }
+
+        private void contextMenuStripCreate_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private async void toolStripMenuPilot_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
