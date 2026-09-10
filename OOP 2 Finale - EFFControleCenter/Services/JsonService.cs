@@ -73,8 +73,11 @@ namespace OOP_2_Finale___EFFControleCenter.Services
         public static async Task<int> GetNextId<T>(string fileName) where T : Entity
         {
             List<T> items = await LoadFromJson<T>(fileName);
-            int nextId = items.Count + 1;
-            return nextId;
+            if (items.Count == 0)
+            {
+                return 1;
+            }
+            return items.Max(x => x.Id) + 1;
         }
     }
 }

@@ -10,6 +10,13 @@ namespace OOP_2_Finale___EFFControleCenter.Models
         public int Damage { get; }
         public int EnergyCost { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the Weapon class with the specified name, damage, and energy cost.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="damage"></param>
+        /// <param name="energyCost"></param>
+        /// <exception cref="ArgumentException"></exception>
         public Weapon(string name, int damage, int energyCost)
         {
             if (string.IsNullOrWhiteSpace(name))

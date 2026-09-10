@@ -63,11 +63,23 @@ namespace OOP_2_Finale___EFFControleCenter.Services
 
         private static MobileUnitData ConvertToUnitData(MobileUnit unit)
         {
-            return new MobileUnitData
+            MobileUnitData data = new MobileUnitData
             {
                 Id = unit.Id,
-                Type = unit.GetType().Name
+                Type = unit.GetType().Name,
+                PilotId = unit.AssignedPilot?.Id,
+                SquadId = unit.AssignedSquad?.Id,
             };
+
+            if (unit is MobileWeapon mobileWeapon)
+            {
+                foreach (var weapon in mobileWeapon.Loadout)
+                {
+                    data.WeaponIds.Add(weapon.Id);
+                }
+            }
+
+            return data;
         }
     }
 }
