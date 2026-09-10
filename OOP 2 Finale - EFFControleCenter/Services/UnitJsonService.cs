@@ -67,8 +67,7 @@ namespace OOP_2_Finale___EFFControleCenter.Services
             {
                 Id = unit.Id,
                 Type = unit.GetType().Name,
-                PilotId = unit.AssignedPilot?.Id,
-                SquadId = unit.AssignedSquad?.Id,
+                PilotId = unit.AssignedPilot?.Id
             };
 
             if (unit is MobileWeapon mobileWeapon)
