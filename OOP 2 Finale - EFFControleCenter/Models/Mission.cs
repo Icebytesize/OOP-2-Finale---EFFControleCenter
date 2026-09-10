@@ -12,19 +12,24 @@ namespace OOP_2_Finale___EFFControleCenter.Models
         public string Description { get; }
         public TerrainType Terrain { get; }
         public MissionStatus Status { get; private set; }
+        public TimeSpan Duration { get; }
 
         public Squad? AssignedSquad { get; private set; }
+        public event Action<Mission>? MissionCompleted;
 
-        public Mission(string name, string description, TerrainType terrain)
+        public Mission(string name, string description, TerrainType terrain, TimeSpan duration)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 throw new ArgumentException("Mission name cannot be null or empty.", nameof(name));
             }
 
+            if (duration <= TimeSpan.Zero) throw new ArgumentException("Mission duration must be greater than zero.", nameof(duration));
+
             Name = name;
             Description = description;
             Terrain = terrain;
+            Duration = duration;
             Status = MissionStatus.Pending;
             AssignedSquad = null;
         }
@@ -61,6 +66,7 @@ namespace OOP_2_Finale___EFFControleCenter.Models
             Status = MissionStatus.InProgress;
         }
 
+
         public void CompleteMission()
         {
             if (Status != MissionStatus.InProgress)
@@ -68,6 +74,17 @@ namespace OOP_2_Finale___EFFControleCenter.Models
                 throw new InvalidOperationException("Mission can only be completed if it is in progress.");
             }
             Status = MissionStatus.Completed;
+        }
+
+        public async Task RunMissionAsync()
+        {
+            StartMission();
+
+            await Task.Delay(Duration);
+
+            CompleteMission();
+
+            MissionCompleted?.Invoke(this);
         }
 
         /// <summary>
@@ -79,6 +96,7 @@ namespace OOP_2_Finale___EFFControleCenter.Models
             Console.WriteLine($"Description: {Description}");
             Console.WriteLine($"Terrain: {Terrain}");
             Console.WriteLine($"Status: {Status}");
+            Console.WriteLine($"Duration: {Duration.TotalMinutes} Minuts");
             
             if (AssignedSquad != null)
             {

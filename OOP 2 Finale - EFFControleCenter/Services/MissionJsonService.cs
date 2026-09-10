@@ -36,10 +36,9 @@ namespace OOP_2_Finale___EFFControleCenter.Services
             List<Mission> missions = new();
             foreach (MissionData data in missionData)
             {
-                Mission mission = new Mission(data.Name, data.Description, data.Terrain)
+                Mission mission = new Mission(data.Name, data.Description, data.Terrain, data.Duration)
                 {
                     Id = data.Id,
-                   
                 };
 
                 if (data.AssignedSquadId.HasValue)
