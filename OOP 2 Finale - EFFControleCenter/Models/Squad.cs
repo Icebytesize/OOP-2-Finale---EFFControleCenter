@@ -1,0 +1,64 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using OOP_2_Finale___EFFControleCenter.Units;
+
+namespace OOP_2_Finale___EFFControleCenter.Models
+{
+    public class Squad
+    {
+        public string Name { get; }
+        private readonly List<MobileUnit> _units = new();
+        public IReadOnlyList<MobileUnit> Units => _units;
+        const int MaxUnits = 4;
+
+        public Squad(string name)
+        {
+            Name = name;
+        }
+
+        public void AddUnit(MobileUnit unit)
+        {
+            if (Units.Count >= MaxUnits)
+                throw new InvalidOperationException($"Cannot add more than {MaxUnits} units to the squad.");
+
+            if (unit.AssignedSquad != null)
+                throw new InvalidOperationException($"Unit {unit.Name} is already assigned to a squad.");
+
+            _units.Add(unit);
+            unit.SetSquad(this);
+        }
+        
+
+        public void RemoveUnit(MobileUnit unit)
+        {
+            if (_units.Remove(unit))
+            {
+                unit.SetSquad(null);
+            }
+        }
+
+        public void DisplaySquadInfo()
+        {
+            Console.WriteLine($"Squad Name: {Name}");
+            Console.WriteLine("Units in Squad:");
+            foreach (var unit in Units)
+            {
+                Console.WriteLine($"-{unit.Name}: {unit.GetDescription()}");
+            }
+        }
+
+        public bool IsReadyForMission()
+        {
+            foreach (var unit in Units)
+            {
+                if (!unit.IsAvailable)
+                {
+                    
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+}

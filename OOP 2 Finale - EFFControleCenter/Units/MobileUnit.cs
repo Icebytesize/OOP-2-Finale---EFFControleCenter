@@ -10,9 +10,10 @@ namespace OOP_2_Finale___EFFControleCenter.Units
         
         public string Name { get; set; }
         public int Health { get; private set; }
-        public int energy { get; private set; }
-        public bool IsAvaible { get; private set; }
+        public int Energy { get; private set; }
+        public bool IsAvailable { get; private set; }
         public Pilot? AssignedPilot { get; private set; }
+        public Squad? AssignedSquad { get; private set; } = null;
 
         /// <summary>
         /// Initializes a new instance of the MobileUnit class with the specified name, health, and energy.
@@ -42,12 +43,13 @@ namespace OOP_2_Finale___EFFControleCenter.Units
 
             Name = name;
             Health = health;
-            energy = energy;
-            IsAvaible = true;
+            Energy = energy;
+            IsAvailable = true;
             AssignedPilot = null;
+            AssignedSquad = null;
         }
 
-        public void AssignPilot(Pilot pilot)
+        internal void AssignPilot(Pilot pilot)
         {
             ArgumentNullException.ThrowIfNull(pilot);
 
@@ -55,7 +57,7 @@ namespace OOP_2_Finale___EFFControleCenter.Units
             pilot.AssignUnit(this);
         }
 
-        public void RemovePilot()
+        internal void RemovePilot()
         {
             if (AssignedPilot != null)
             {
@@ -64,14 +66,26 @@ namespace OOP_2_Finale___EFFControleCenter.Units
             AssignedPilot = null;
         }
 
+        internal void SetSquad(Squad squad)
+        {
+            ArgumentNullException.ThrowIfNull(squad);
+            AssignedSquad = squad;
+        }
+
+        internal void RemoveFromSquad(Squad squad)
+        {
+            ArgumentNullException.ThrowIfNull(squad);
+            AssignedSquad = null;
+        }
+
         public void Deploy()
         {
-            if(!IsAvaible) 
+            if(!IsAvailable) 
             {
                 throw new InvalidOperationException("This mobile unit is not available for deployment.");
             }
 
-            IsAvaible = false;
+            IsAvailable = false;
         }
 
         public abstract string GetDescription();
