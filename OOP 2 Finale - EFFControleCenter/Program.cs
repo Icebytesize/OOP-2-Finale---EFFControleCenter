@@ -1,8 +1,16 @@
-﻿using OOP_2_Finale___EFFControleCenter.Enums;
-using OOP_2_Finale___EFFControleCenter.Models;
+﻿using System.Windows.Forms;
 using OOP_2_Finale___EFFControleCenter.Services;
-using OOP_2_Finale___EFFControleCenter.Units;
+using OOP_2_Finale___EFFControleCenter.WinForms;
 
-
-
-var controlCenter = await DataLoader.LoadAllData();
+namespace OOP_2_Finale___EFFControleCenter
+{
+    internal static class Program
+    {
+        [STAThread]
+        static void Main()
+        {
+            ApplicationConfiguration.Initialize();
+            Application.Run(new MainForm());
+        }
+    }
+}

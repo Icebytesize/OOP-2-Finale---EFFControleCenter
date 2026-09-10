@@ -7,8 +7,8 @@ namespace OOP_2_Finale___EFFControleCenter.Units
 {
     public class ZetaGundam : Specialized, IFlyable
     {
-        public ZetaGundam()
-            : base("Zeta Gundam", 170, 180)
+        public ZetaGundam(string name)
+            : base(name, 170, 180)
         {
         }
 

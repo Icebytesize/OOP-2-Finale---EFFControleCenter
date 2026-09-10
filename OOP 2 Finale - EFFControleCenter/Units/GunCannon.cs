@@ -6,8 +6,8 @@ namespace OOP_2_Finale___EFFControleCenter.Units
 {
     public class GunCannon : MassProduced
     {
-        public GunCannon()
-            : base("GunCannon", 130, 110)
+        public GunCannon(string name)
+            : base(name, 130, 110)
         {
         }
 

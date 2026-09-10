@@ -7,8 +7,8 @@ namespace OOP_2_Finale___EFFControleCenter.Units
 {
     public class AquaGM : MassProduced, IUnderwaterCapable
     {
-        public AquaGM()
-            : base("Aqua GM", 110, 100)
+        public AquaGM(string name)
+            : base(name, 110, 100)
         {
         }
 

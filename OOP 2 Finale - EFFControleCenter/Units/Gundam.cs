@@ -6,8 +6,8 @@ namespace OOP_2_Finale___EFFControleCenter.Units
 {
     public class Gundam : Specialized
     {
-        public Gundam()
-            : base("Gundam", 180, 160)
+        public Gundam(string name)
+            : base(name, 180, 160)
         {
         }
 

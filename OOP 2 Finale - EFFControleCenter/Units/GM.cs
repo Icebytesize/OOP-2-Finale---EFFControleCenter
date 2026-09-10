@@ -7,8 +7,8 @@ namespace OOP_2_Finale___EFFControleCenter.Units
 {
     public class GM : MassProduced
     {
-        public GM()
-            : base("GM", 100, 100)
+        public GM(string name)
+            : base(name, 100, 100)
         {
         }
 

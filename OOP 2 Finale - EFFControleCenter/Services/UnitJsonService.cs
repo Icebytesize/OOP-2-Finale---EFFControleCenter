@@ -41,11 +41,11 @@ namespace OOP_2_Finale___EFFControleCenter.Services
                 // Recreate the correct concrete MobileUnit type from the saved type name.
                 MobileUnit unit = data.Type switch
                 {
-                    "GM" => new GM(),
-                    "GunCannon" => new GunCannon(),
-                    "AquaGM" => new AquaGM(),
-                    "Gundam" => new Gundam(),
-                    "ZetaGundam" => new ZetaGundam(),
+                    "GM" => new GM(data.Name),
+                    "GunCannon" => new GunCannon(data.Name),
+                    "AquaGM" => new AquaGM(data.Name),
+                    "Gundam" => new Gundam(data.Name),
+                    "ZetaGundam" => new ZetaGundam(data.Name),
 
                     _ => throw new InvalidOperationException($"Unknown mobile unit type: {data.Type}")
                 };
@@ -99,6 +99,7 @@ namespace OOP_2_Finale___EFFControleCenter.Services
             MobileUnitData data = new MobileUnitData
             {
                 Id = unit.Id,
+                Name = unit.Name,
                 Type = unit.GetType().Name,
                 PilotId = unit.AssignedPilot?.Id
             };
