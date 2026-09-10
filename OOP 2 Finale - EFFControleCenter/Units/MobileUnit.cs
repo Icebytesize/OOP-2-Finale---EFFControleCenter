@@ -13,7 +13,7 @@ namespace OOP_2_Finale___EFFControleCenter.Units
         public int Energy { get; private set; }
         public bool IsAvailable { get; private set; }
         public Pilot? AssignedPilot { get; private set; }
-        public Squad? AssignedSquad { get; private set; } = null;
+        public Squad? AssignedSquad { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the MobileUnit class with the specified name, health, and energy.
@@ -68,7 +68,6 @@ namespace OOP_2_Finale___EFFControleCenter.Units
 
         internal void SetSquad(Squad squad)
         {
-            ArgumentNullException.ThrowIfNull(squad);
             AssignedSquad = squad;
         }
 

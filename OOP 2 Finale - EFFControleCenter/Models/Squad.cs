@@ -19,6 +19,8 @@ namespace OOP_2_Finale___EFFControleCenter.Models
 
         public void AddUnit(MobileUnit unit)
         {
+            ArgumentNullException.ThrowIfNull(unit);
+
             if (Units.Count >= MaxUnits)
                 throw new InvalidOperationException($"Cannot add more than {MaxUnits} units to the squad.");
 
@@ -32,24 +34,24 @@ namespace OOP_2_Finale___EFFControleCenter.Models
 
         public void RemoveUnit(MobileUnit unit)
         {
+            ArgumentNullException.ThrowIfNull(unit);
             if (_units.Remove(unit))
             {
                 unit.SetSquad(null);
             }
         }
 
-        public void DisplaySquadInfo()
-        {
-            Console.WriteLine($"Squad Name: {Name}");
-            Console.WriteLine("Units in Squad:");
-            foreach (var unit in Units)
-            {
-                Console.WriteLine($"-{unit.Name}: {unit.GetDescription()}");
-            }
-        }
-
+        /// <summary>
+        /// Checks if the squad is ready for a mission. A squad is considered ready if it has at least one unit and all units are available.
+        /// </summary>
+        /// <returns></returns>
         public bool IsReadyForMission()
         {
+            if (_units.Count == 0)
+            {
+                return false;
+            }
+
             foreach (var unit in Units)
             {
                 if (!unit.IsAvailable)
@@ -60,5 +62,20 @@ namespace OOP_2_Finale___EFFControleCenter.Models
             }
             return true;
         }
+
+        /// <summary>
+        /// Displays information about the squad, including its name and the details of each unit in the squad.
+        /// </summary>
+        public void DisplaySquadInfo()
+        {
+            Console.WriteLine($"Squad Name: {Name}");
+            Console.WriteLine("Units in Squad:");
+
+            foreach (var unit in Units)
+            {
+                Console.WriteLine($"-{unit.Name}: {unit.GetDescription()}");
+            }
+        }
+
     }
 }
