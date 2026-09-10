@@ -73,7 +73,17 @@ namespace OOP_2_Finale___EFFControleCenter.Models
 
             foreach (var unit in Units)
             {
-                Console.WriteLine($"-{unit.Name}: {unit.GetDescription()}");
+                Console.WriteLine($"-{unit.GetStatus()}");
+            }
+        }
+        public void DisplaySquadDescription()
+        {
+            Console.WriteLine($"Squad Name: {Name}");
+            Console.WriteLine("Units in Squad:");
+
+            foreach (var unit in Units)
+            {
+                Console.WriteLine($"-{unit.GetDescription()}");
             }
         }
 

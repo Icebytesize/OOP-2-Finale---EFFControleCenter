@@ -2,6 +2,8 @@
 using OOP_2_Finale___EFFControleCenter.Models;
 using OOP_2_Finale___EFFControleCenter.Units;
 
+var controlCenter = new EFFControlCenter();
+
 var gm = new GM();
 var gundam = new Gundam();
 var aquaGM = new AquaGM();
@@ -12,7 +14,7 @@ squad1.AddUnit(gm);
 squad1.AddUnit(gundam);
 squad1.AddUnit(aquaGM);
 
-squad1.DisplaySquadInfo();
+squad1.DisplaySquadDescription();
 
 Console.WriteLine();
 
@@ -22,15 +24,16 @@ var mission = new Mission(
     TerrainType.Urban
 );
 
-mission.AssignSquad(squad1);
+controlCenter.AddSquad(squad1);
+controlCenter.AddMission(mission);
 
-Console.WriteLine($"Mission: {mission.Name}");
-Console.WriteLine($"Status: {mission.Status}");
-Console.WriteLine($"Squad: {mission.AssignedSquad?.Name}");
+controlCenter.AssignSquadToMission(squad1, mission);
+
+mission.MissionInfo();
 
 Console.WriteLine();
 
 mission.StartMission();
 
-Console.WriteLine($"Status after start: {mission.Status}");
-Console.WriteLine($"Squad ready: {squad1.IsReadyForMission()}");
+mission.MissionInfo();
+Console.ReadKey();

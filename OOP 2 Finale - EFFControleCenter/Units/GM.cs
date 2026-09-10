@@ -16,5 +16,7 @@ namespace OOP_2_Finale___EFFControleCenter.Units
         {
             return "A standard mass-produced mobile suit used by the Earth Federation.";
         }
+
+        
     }
 }

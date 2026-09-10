@@ -15,5 +15,6 @@ namespace OOP_2_Finale___EFFControleCenter.Units
         {
             return "A heavily armed mass-produced mobile suit focused on ranged combat.";
         }
+        
     }
 }

@@ -88,5 +88,9 @@ namespace OOP_2_Finale___EFFControleCenter.Units
         }
 
         public abstract string GetDescription();
+        public virtual string GetStatus()
+        {
+            return $"Unit Name: {Name} - Health: {Health} - Energy: {Energy}";
+        }
     }
 }

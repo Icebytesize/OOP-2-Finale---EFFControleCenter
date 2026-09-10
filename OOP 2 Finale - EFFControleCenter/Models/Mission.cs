@@ -69,6 +69,23 @@ namespace OOP_2_Finale___EFFControleCenter.Models
             }
             Status = MissionStatus.Completed;
         }
+
+        public void MissionInfo()
+        {
+            Console.WriteLine($"Mission: {Name}");
+            Console.WriteLine($"Description: {Description}");
+            Console.WriteLine($"Terrain: {Terrain}");
+            Console.WriteLine($"Status: {Status}");
+            
+            if (AssignedSquad != null)
+            {
+                AssignedSquad.DisplaySquadInfo();
+            }
+            else
+            {
+                Console.WriteLine("Assigned Squad: None");
+            }
+        }
     }
 }
 
