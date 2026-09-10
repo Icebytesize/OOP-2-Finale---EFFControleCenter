@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OOP_2_Finale___EFFControleCenter.Models
 {
-    public class Weapon
+    public class Weapon : Entity
     {
         public string Name { get;  }
         public int Damage { get; }

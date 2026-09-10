@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OOP_2_Finale___EFFControleCenter.Models
 {
-    public class MilitaryBase
+    public class MilitaryBase : Entity
     {
         public string Name { get; set; }
         public string Location { get; set; } = string.Empty;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Text.Json;
+using OOP_2_Finale___EFFControleCenter.Models;
 
 namespace OOP_2_Finale___EFFControleCenter.Services
 {
@@ -12,16 +13,16 @@ namespace OOP_2_Finale___EFFControleCenter.Services
             Path.Combine(AppContext.BaseDirectory, "Data");
 
         /// <summary>
-        /// Saves a list of items to a JSON file at the specified file path.
+        /// Overwrites a JSON file with a list of items.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="filePath"></param>
+        /// <param name="fileName"></param>
         /// <param name="items"></param>
         /// <returns></returns>
-        public static async Task SaveToJson<T>(string fileName, List<T> items)
+        public static async Task OverwriteJson<T>(string fileName, List<T> items)
         {
             Directory.CreateDirectory(DataFolder);
-            
+
             string filePath = Path.Combine(DataFolder, fileName);
 
             string json = JsonSerializer.Serialize(items, new JsonSerializerOptions { WriteIndented = true });
@@ -33,26 +34,47 @@ namespace OOP_2_Finale___EFFControleCenter.Services
         /// Loads a list of items from a JSON file at the specified file path.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="filePath"></param>
+        /// <param name="fileName"></param>
         /// <returns></returns>
         public static async Task<List<T>> LoadFromJson<T>(string fileName)
         {
             Directory.CreateDirectory(DataFolder);
 
 
-            string filePath = Path.Combine(DataFolder, fileName); 
+            string filePath = Path.Combine(DataFolder, fileName);
 
-        
+
             if (!File.Exists(filePath))
             {
                 return new List<T>();
             }
-            
+
             string json = await File.ReadAllTextAsync(filePath);
 
             List<T>? items = JsonSerializer.Deserialize<List<T>>(json);
 
             return items ?? new List<T>();
+        }
+
+        /// <summary>
+        /// Appends a list of items to an existing JSON file. If the file does not exist, it creates a new one.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="fileName"></param>
+        /// <param name="itemsToAdd"></param>
+        /// <returns></returns>
+        public static async Task AppendToJson<T>(string fileName, List<T> itemsToAdd)
+        {
+            List<T> items = await LoadFromJson<T>(fileName);
+            items.AddRange(itemsToAdd);
+            await OverwriteJson(fileName, items);
+        }
+
+        public static async Task<int> GetNextId<T>(string fileName) where T : Entity
+        {
+            List<T> items = await LoadFromJson<T>(fileName);
+            int nextId = items.Count + 1;
+            return nextId;
         }
     }
 }

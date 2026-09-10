@@ -1,42 +1,37 @@
 ﻿using OOP_2_Finale___EFFControleCenter.Enums;
 using OOP_2_Finale___EFFControleCenter.Models;
+using OOP_2_Finale___EFFControleCenter.Services;
 using OOP_2_Finale___EFFControleCenter.Units;
 
 
 
+List<Pilot> EmptyPilots = new List<Pilot>();
+await JsonService.OverwriteJson("pilots.json", EmptyPilots);
+
 
 var controlCenter = new EFFControlCenter();
 
-var gm = new GM();
-var gundam = new Gundam();
-var aquaGM = new AquaGM();
+var pilots = new List<Pilot>
+{
+    new Pilot("Amuro Ray"),
+    new Pilot("Sayla Mass"),
+    new Pilot("Hayato Kobayashi")
+};
 
-var squad1 = new Squad("Squad-1");
+int nextId = await JsonService.GetNextId<Pilot>("pilots.json");
 
-squad1.AddUnit(gm);
-squad1.AddUnit(gundam);
-squad1.AddUnit(aquaGM);
+foreach (Pilot pilot in pilots)
+{
+    pilot.Id = nextId;
+    nextId++;
+}
 
-squad1.DisplaySquadDescription();
 
-Console.WriteLine();
+await JsonService.OverwriteJson("pilots.json", pilots);
 
-var mission = new Mission(
-    "Operation Odessa",
-    "Secure the area and eliminate hostile forces.",
-    TerrainType.Urban
-);
+List<Pilot> loadedPilots = await JsonService.LoadFromJson<Pilot>("pilots.json");
 
-controlCenter.AddSquad(squad1);
-controlCenter.AddMission(mission);
-
-controlCenter.AssignSquadToMission(squad1, mission);
-
-mission.MissionInfo();
-
-Console.WriteLine();
-
-mission.StartMission();
-
-mission.MissionInfo();
-Console.ReadKey();
+foreach (Pilot pilot in loadedPilots)
+{
+    Console.WriteLine($"Pilot: {pilot.Name}, ID: {pilot.Id}");
+}

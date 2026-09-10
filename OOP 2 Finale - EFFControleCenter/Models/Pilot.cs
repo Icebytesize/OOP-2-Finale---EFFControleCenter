@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OOP_2_Finale___EFFControleCenter.Models
 {
-    public class Pilot
+    public class Pilot : Entity
     {
 
         public string Name { get; }

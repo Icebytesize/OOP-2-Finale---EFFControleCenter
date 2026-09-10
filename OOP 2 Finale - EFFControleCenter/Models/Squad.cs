@@ -5,7 +5,7 @@ using OOP_2_Finale___EFFControleCenter.Units;
 
 namespace OOP_2_Finale___EFFControleCenter.Models
 {
-    public class Squad
+    public class Squad : Entity
     {
         public string Name { get; }
         private readonly List<MobileUnit> _units = new();

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OOP_2_Finale___EFFControleCenter.Models
 {
-    public class EFFControlCenter
+    public class EFFControlCenter : Entity
     {
         private readonly List<Mission> _mission = new();
         private readonly List<Squad> _squad = new();

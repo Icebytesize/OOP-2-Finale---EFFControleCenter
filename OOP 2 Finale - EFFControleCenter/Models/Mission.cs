@@ -6,7 +6,7 @@ using System.Text;
 
 namespace OOP_2_Finale___EFFControleCenter.Models
 {
-    public class Mission
+    public class Mission : Entity
     {
         public string Name { get; }
         public string Description { get; }

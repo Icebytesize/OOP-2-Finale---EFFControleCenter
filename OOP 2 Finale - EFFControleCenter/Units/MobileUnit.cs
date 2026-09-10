@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OOP_2_Finale___EFFControleCenter.Units
 {
-    public abstract class MobileUnit
+    public abstract class MobileUnit : Entity
     {
         
         public string Name { get; set; }
