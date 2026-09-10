@@ -51,9 +51,7 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
 
         private async void btnCreateUnit_Click(object sender, EventArgs e)
         {
-            contextMenuStripCreate.Show(
-            btnCreate,
-            new Point(0, btnCreate.Height));
+            contextMenuStripCreate.Show(btnCreate, new Point(0, btnCreate.Height));
             /* if (_controlCenter == null)
                 return;
 
@@ -174,7 +172,7 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
 
         private async void toolStripMenuMission_Click(object sender, EventArgs e)
         {
-            if( _controlCenter == null) return;
+            if (_controlCenter == null) return;
 
             using CreateMissionForm createForm = new CreateMissionForm(_controlCenter);
 
@@ -192,6 +190,20 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
 
                 MessageBox.Show($"{newMission.Name} created successfully.");
             }
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            contextMenuStripView.Show(btnView, new Point(0, btnCreate.Height));
+        }
+
+        private void toolStripViewUnit_Click(object sender, EventArgs e)
+        {
+            if (_controlCenter == null) return;
+
+            using UnitsOverviewForm form = new UnitsOverviewForm(_controlCenter);
+
+            form.ShowDialog();
         }
     }
 }

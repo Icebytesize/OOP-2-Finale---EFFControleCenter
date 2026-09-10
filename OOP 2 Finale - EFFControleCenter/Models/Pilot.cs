@@ -24,7 +24,10 @@ namespace OOP_2_Finale___EFFControleCenter.Models
             ArgumentNullException.ThrowIfNull(unit);
             AssignedUnit = unit;
         }
-
+        public override string ToString()
+        {
+            return Name;
+        }
         internal void RemoveUnit()
         {
             AssignedUnit = null;

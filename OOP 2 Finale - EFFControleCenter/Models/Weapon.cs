@@ -35,6 +35,9 @@ namespace OOP_2_Finale___EFFControleCenter.Models
             Damage = damage;
             EnergyCost = energyCost;
         }
-
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

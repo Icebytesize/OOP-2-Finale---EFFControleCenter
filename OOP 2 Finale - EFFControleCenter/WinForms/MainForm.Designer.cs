@@ -37,7 +37,15 @@
             toolStripMenuSquad = new ToolStripMenuItem();
             toolStripMenuMission = new ToolStripMenuItem();
             toolStripMenuWeapon = new ToolStripMenuItem();
+            contextMenuStripView = new ContextMenuStrip(components);
+            toolStripViewUnit = new ToolStripMenuItem();
+            toolStripViewPilot = new ToolStripMenuItem();
+            toolStripViewWeapon = new ToolStripMenuItem();
+            toolStripViewSquad = new ToolStripMenuItem();
+            toolStripViewMission = new ToolStripMenuItem();
+            btnView = new Button();
             contextMenuStripCreate.SuspendLayout();
+            contextMenuStripView.SuspendLayout();
             SuspendLayout();
             // 
             // btnCreate
@@ -66,55 +74,104 @@
             // 
             contextMenuStripCreate.Items.AddRange(new ToolStripItem[] { toolStripMenuUnit, toolStripMenuPilot, toolStripMenuSquad, toolStripMenuMission, toolStripMenuWeapon });
             contextMenuStripCreate.Name = "contextMenuStrip1";
-            contextMenuStripCreate.Size = new Size(181, 136);
+            contextMenuStripCreate.Size = new Size(119, 114);
             contextMenuStripCreate.Opening += contextMenuStripCreate_Opening;
             // 
             // toolStripMenuUnit
             // 
             toolStripMenuUnit.Name = "toolStripMenuUnit";
-            toolStripMenuUnit.Size = new Size(180, 22);
+            toolStripMenuUnit.Size = new Size(118, 22);
             toolStripMenuUnit.Text = "Unit";
             toolStripMenuUnit.Click += toolStripMenuItem1_Click;
             // 
             // toolStripMenuPilot
             // 
             toolStripMenuPilot.Name = "toolStripMenuPilot";
-            toolStripMenuPilot.Size = new Size(180, 22);
+            toolStripMenuPilot.Size = new Size(118, 22);
             toolStripMenuPilot.Text = "Pilot";
             toolStripMenuPilot.Click += toolStripMenuPilot_Click;
             // 
             // toolStripMenuSquad
             // 
             toolStripMenuSquad.Name = "toolStripMenuSquad";
-            toolStripMenuSquad.Size = new Size(180, 22);
+            toolStripMenuSquad.Size = new Size(118, 22);
             toolStripMenuSquad.Text = "Squad";
             toolStripMenuSquad.Click += toolStripMenuSquad_Click;
             // 
             // toolStripMenuMission
             // 
             toolStripMenuMission.Name = "toolStripMenuMission";
-            toolStripMenuMission.Size = new Size(180, 22);
+            toolStripMenuMission.Size = new Size(118, 22);
             toolStripMenuMission.Text = "Mission";
             toolStripMenuMission.Click += toolStripMenuMission_Click;
             // 
             // toolStripMenuWeapon
             // 
             toolStripMenuWeapon.Name = "toolStripMenuWeapon";
-            toolStripMenuWeapon.Size = new Size(180, 22);
+            toolStripMenuWeapon.Size = new Size(118, 22);
             toolStripMenuWeapon.Text = "Weapon";
             toolStripMenuWeapon.Click += toolStripMenuWeapon_Click;
+            // 
+            // contextMenuStripView
+            // 
+            contextMenuStripView.Items.AddRange(new ToolStripItem[] { toolStripViewUnit, toolStripViewPilot, toolStripViewWeapon, toolStripViewSquad, toolStripViewMission });
+            contextMenuStripView.Name = "contextMenuStripView";
+            contextMenuStripView.Size = new Size(181, 136);
+            // 
+            // toolStripViewUnit
+            // 
+            toolStripViewUnit.Name = "toolStripViewUnit";
+            toolStripViewUnit.Size = new Size(180, 22);
+            toolStripViewUnit.Text = "Unit";
+            toolStripViewUnit.Click += toolStripViewUnit_Click;
+            // 
+            // toolStripViewPilot
+            // 
+            toolStripViewPilot.Name = "toolStripViewPilot";
+            toolStripViewPilot.Size = new Size(180, 22);
+            toolStripViewPilot.Text = "Pilot";
+            // 
+            // toolStripViewWeapon
+            // 
+            toolStripViewWeapon.Name = "toolStripViewWeapon";
+            toolStripViewWeapon.Size = new Size(180, 22);
+            toolStripViewWeapon.Text = "Weapon";
+            // 
+            // toolStripViewSquad
+            // 
+            toolStripViewSquad.Name = "toolStripViewSquad";
+            toolStripViewSquad.Size = new Size(180, 22);
+            toolStripViewSquad.Text = "Squad";
+            // 
+            // toolStripViewMission
+            // 
+            toolStripViewMission.Name = "toolStripViewMission";
+            toolStripViewMission.Size = new Size(180, 22);
+            toolStripViewMission.Text = "Mission";
+            // 
+            // btnView
+            // 
+            btnView.Location = new Point(157, 131);
+            btnView.Name = "btnView";
+            btnView.Size = new Size(75, 23);
+            btnView.TabIndex = 3;
+            btnView.Text = "View";
+            btnView.UseVisualStyleBackColor = true;
+            btnView.Click += btnView_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnView);
             Controls.Add(lblTitle);
             Controls.Add(btnCreate);
             Name = "MainForm";
             Text = "MainForm";
             Load += MainForm_Load;
             contextMenuStripCreate.ResumeLayout(false);
+            contextMenuStripView.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -128,5 +185,12 @@
         private ToolStripMenuItem toolStripMenuSquad;
         private ToolStripMenuItem toolStripMenuMission;
         private ToolStripMenuItem toolStripMenuWeapon;
+        private ContextMenuStrip contextMenuStripView;
+        private ToolStripMenuItem toolStripViewUnit;
+        private ToolStripMenuItem toolStripViewPilot;
+        private ToolStripMenuItem toolStripViewWeapon;
+        private ToolStripMenuItem toolStripViewSquad;
+        private ToolStripMenuItem toolStripViewMission;
+        private Button btnView;
     }
 }
