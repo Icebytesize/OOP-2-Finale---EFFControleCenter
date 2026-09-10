@@ -112,7 +112,64 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
 
         private async void toolStripMenuPilot_Click(object sender, EventArgs e)
         {
+            if (_controlCenter == null) return;
 
+            using CreatePilotForm createForm = new CreatePilotForm();
+
+            if (createForm.ShowDialog() == DialogResult.OK && createForm.CreatedPilot != null)
+            {
+                Pilot newPilot = createForm.CreatedPilot;
+
+                int nextId = await JsonService.GetNextId<Pilot>("pilots.json");
+
+                newPilot.Id = nextId;
+
+                _controlCenter.AddPilot(newPilot);
+
+                await JsonService.AppendToJson("pilots.json", new List<Pilot> { newPilot });
+            }
+        }
+
+        private async void toolStripMenuWeapon_Click(object sender, EventArgs e)
+        {
+            if (_controlCenter == null) return;
+
+            using CreateWeaponForm createForm = new CreateWeaponForm();
+
+            if (createForm.ShowDialog() == DialogResult.OK && createForm.CreatedWeapon != null)
+            {
+                Weapon newWeapon = createForm.CreatedWeapon;
+
+                int nextId = await JsonService.GetNextId<Weapon>("weapons.json");
+
+                newWeapon.Id = nextId;
+
+                _controlCenter.AddWeapon(newWeapon);
+
+                await JsonService.AppendToJson("weapons.json", new List<Weapon> { newWeapon });
+            }
+        }
+
+        private async void toolStripMenuSquad_Click(object sender, EventArgs e)
+        {
+            if ( _controlCenter == null) return;
+
+            using CreateSquadForm createForm = new CreateSquadForm(_controlCenter);
+
+            if (createForm.ShowDialog() == DialogResult.OK && createForm.CreatedSquad != null)
+            {
+                Squad newSquad = createForm.CreatedSquad;
+
+                int nextId = await JsonService.GetNextId<SquadData>("squads.json");
+
+                newSquad.Id = nextId;
+
+                _controlCenter.AddSquad(newSquad);
+
+                await SquadJsonService.AppendSquadsToJson("squads.json", new List<Squad> { newSquad });
+
+                MessageBox.Show($"{newSquad.Name} created successfully.");
+            }
         }
     }
 }

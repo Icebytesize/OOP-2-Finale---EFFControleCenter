@@ -48,7 +48,10 @@ namespace OOP_2_Finale___EFFControleCenter.Units
             AssignedPilot = null;
             AssignedSquad = null;
         }
-
+        public override string ToString()
+        {
+            return $"{Name} ({GetType().Name}) ";
+        }
         internal void AssignPilot(Pilot pilot)
         {
             ArgumentNullException.ThrowIfNull(pilot);

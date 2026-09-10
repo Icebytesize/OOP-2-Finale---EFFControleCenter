@@ -37,7 +37,6 @@
             toolStripMenuSquad = new ToolStripMenuItem();
             toolStripMenuMission = new ToolStripMenuItem();
             toolStripMenuWeapon = new ToolStripMenuItem();
-            toolStripMenuBase = new ToolStripMenuItem();
             contextMenuStripCreate.SuspendLayout();
             SuspendLayout();
             // 
@@ -65,9 +64,9 @@
             // 
             // contextMenuStripCreate
             // 
-            contextMenuStripCreate.Items.AddRange(new ToolStripItem[] { toolStripMenuUnit, toolStripMenuPilot, toolStripMenuSquad, toolStripMenuMission, toolStripMenuWeapon, toolStripMenuBase });
+            contextMenuStripCreate.Items.AddRange(new ToolStripItem[] { toolStripMenuUnit, toolStripMenuPilot, toolStripMenuSquad, toolStripMenuMission, toolStripMenuWeapon });
             contextMenuStripCreate.Name = "contextMenuStrip1";
-            contextMenuStripCreate.Size = new Size(181, 158);
+            contextMenuStripCreate.Size = new Size(181, 136);
             contextMenuStripCreate.Opening += contextMenuStripCreate_Opening;
             // 
             // toolStripMenuUnit
@@ -89,6 +88,7 @@
             toolStripMenuSquad.Name = "toolStripMenuSquad";
             toolStripMenuSquad.Size = new Size(180, 22);
             toolStripMenuSquad.Text = "Squad";
+            toolStripMenuSquad.Click += toolStripMenuSquad_Click;
             // 
             // toolStripMenuMission
             // 
@@ -101,12 +101,7 @@
             toolStripMenuWeapon.Name = "toolStripMenuWeapon";
             toolStripMenuWeapon.Size = new Size(180, 22);
             toolStripMenuWeapon.Text = "Weapon";
-            // 
-            // toolStripMenuBase
-            // 
-            toolStripMenuBase.Name = "toolStripMenuBase";
-            toolStripMenuBase.Size = new Size(180, 22);
-            toolStripMenuBase.Text = "Base";
+            toolStripMenuWeapon.Click += toolStripMenuWeapon_Click;
             // 
             // MainForm
             // 
@@ -132,6 +127,5 @@
         private ToolStripMenuItem toolStripMenuSquad;
         private ToolStripMenuItem toolStripMenuMission;
         private ToolStripMenuItem toolStripMenuWeapon;
-        private ToolStripMenuItem toolStripMenuBase;
     }
 }
