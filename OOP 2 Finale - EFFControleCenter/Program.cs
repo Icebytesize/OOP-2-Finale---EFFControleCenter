@@ -2,6 +2,9 @@
 using OOP_2_Finale___EFFControleCenter.Models;
 using OOP_2_Finale___EFFControleCenter.Units;
 
+
+
+
 var controlCenter = new EFFControlCenter();
 
 var gm = new GM();

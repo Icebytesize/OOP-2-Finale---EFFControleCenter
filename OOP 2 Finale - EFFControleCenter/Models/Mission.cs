@@ -70,6 +70,9 @@ namespace OOP_2_Finale___EFFControleCenter.Models
             Status = MissionStatus.Completed;
         }
 
+        /// <summary>
+        /// Displays detailed information about the mission, including its name, description, terrain type, status, and assigned squad details if available.
+        /// </summary>
         public void MissionInfo()
         {
             Console.WriteLine($"Mission: {Name}");
