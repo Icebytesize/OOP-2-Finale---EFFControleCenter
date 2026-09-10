@@ -26,7 +26,7 @@ namespace OOP_2_Finale___EFFControleCenter.Services
         }
 
 
-        public static async Task OverwriteSquadsToJson(string fileName, List<Squad> squads)
+        public static async Task OverwriteSquadsToJson(string fileName, IReadOnlyList<Squad> squads)
         {
             List<SquadData> squadData = new();
             foreach (var squad in squads)

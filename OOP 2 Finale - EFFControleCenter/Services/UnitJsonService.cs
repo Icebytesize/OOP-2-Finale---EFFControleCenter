@@ -10,7 +10,7 @@ namespace OOP_2_Finale___EFFControleCenter.Services
 {
     internal class UnitJsonService
     {
-        public static async Task OverwriteUnitsToJson(string fileName, List<MobileUnit> units)
+        public static async Task OverwriteUnitsToJson(string fileName, IReadOnlyList<MobileUnit> units)
         {
             List<MobileUnitData> unitData = new();
             

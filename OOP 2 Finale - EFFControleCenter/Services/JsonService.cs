@@ -19,7 +19,7 @@ namespace OOP_2_Finale___EFFControleCenter.Services
         /// <param name="fileName"></param>
         /// <param name="items"></param>
         /// <returns></returns>
-        public static async Task OverwriteJson<T>(string fileName, List<T> items)
+        public static async Task OverwriteJson<T>(string fileName, IReadOnlyList<T> items)
         {
             Directory.CreateDirectory(DataFolder);
 

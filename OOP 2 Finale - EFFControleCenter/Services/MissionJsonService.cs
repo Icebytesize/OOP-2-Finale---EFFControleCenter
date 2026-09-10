@@ -21,7 +21,7 @@ namespace OOP_2_Finale___EFFControleCenter.Services
             };
             return data;
         }
-        public static async Task OverwriteMissionsToJson(string fileName, List<Mission> missions)
+        public static async Task OverwriteMissionsToJson(string fileName, IReadOnlyList<Mission> missions)
         {
             List<MissionData> missionData = new();
             foreach (var mission in missions)
