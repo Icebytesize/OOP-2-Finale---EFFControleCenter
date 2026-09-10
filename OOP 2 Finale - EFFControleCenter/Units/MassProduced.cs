@@ -8,8 +8,14 @@ namespace OOP_2_Finale___EFFControleCenter.Units
 {
     public abstract class MassProduced : MobileWeapon
     {
-        public MassProduced(string name, int health, int firepower, List<Weapon> loadout)
-            : base(name, health, firepower, loadout)
+
+       public MassProduced(string name, int health, int energy)
+            : base(name, health, energy)
+        {
+        }
+
+        public MassProduced(string name, int health, int energy, List<Weapon> loadout)
+            : base(name, health, energy, loadout)
         {
         }
     }

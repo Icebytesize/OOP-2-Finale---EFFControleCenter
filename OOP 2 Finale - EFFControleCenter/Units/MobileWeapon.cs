@@ -11,6 +11,12 @@ namespace OOP_2_Finale___EFFControleCenter.Units
         private readonly List<Weapon> _loadout = new();
         public IReadOnlyList<Weapon> Loadout => _loadout.AsReadOnly();
 
+
+        protected MobileWeapon(string name, int health, int energy) : base(name, health, energy)
+        {
+            _loadout = new List<Weapon>();
+        }
+
         protected MobileWeapon(string name, int health, int energy, List<Weapon> loadout) : base(name, health, energy)
         {
             _loadout = loadout ?? new List<Weapon>();
