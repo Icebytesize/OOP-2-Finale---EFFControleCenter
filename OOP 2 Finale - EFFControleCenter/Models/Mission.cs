@@ -89,6 +89,10 @@ namespace OOP_2_Finale___EFFControleCenter.Models
                 Console.WriteLine("Assigned Squad: None");
             }
         }
+        internal void SetStatus(MissionStatus status)
+        {
+            Status = status;
+        }
     }
 }
 
