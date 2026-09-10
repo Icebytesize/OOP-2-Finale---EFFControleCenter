@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OOP_2_Finale___EFFControleCenter.Units;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,6 +12,7 @@ namespace OOP_2_Finale___EFFControleCenter.Models
         private readonly List<Pilot> _pilot = new();
         private readonly List<MilitaryBase> _bases = new();
         private readonly List<Weapon> _weapon = new();
+        private readonly List<MobileUnit> _unit = new();
 
 
         public IReadOnlyList<Mission> Missions => _mission;
@@ -18,6 +20,7 @@ namespace OOP_2_Finale___EFFControleCenter.Models
         public IReadOnlyList<Pilot> Pilots => _pilot;
         public IReadOnlyList<MilitaryBase> Bases => _bases;
         public IReadOnlyList<Weapon> Weapons => _weapon;
+        public IReadOnlyList<MobileUnit> Unit => _unit;
 
         public void AddMission(Mission mission)
         {
@@ -47,6 +50,12 @@ namespace OOP_2_Finale___EFFControleCenter.Models
         {
             ArgumentNullException.ThrowIfNull(weapon);
             _weapon.Add(weapon);
+        }
+
+        public void AddUnit(MobileUnit unit)
+        {
+            ArgumentNullException.ThrowIfNull(unit);
+            _unit.Add(unit);
         }
 
         public void AssignSquadToMission(Squad squad, Mission mission)

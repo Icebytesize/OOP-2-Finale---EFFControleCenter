@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using OOP_2_Finale___EFFControleCenter.Units;
-using OOP_2_Finale___EFFControleCenter.Models;
 
 namespace OOP_2_Finale___EFFControleCenter.Services
 {
@@ -41,6 +40,11 @@ namespace OOP_2_Finale___EFFControleCenter.Services
             foreach(Mission mission in missions)
             {
                 controlCenter.AddMission(mission);
+            }
+
+            foreach(MobileUnit unit in units)
+            { 
+                controlCenter.AddUnit(unit); 
             }
 
             return controlCenter;
