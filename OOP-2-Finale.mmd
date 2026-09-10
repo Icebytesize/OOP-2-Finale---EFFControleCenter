@@ -1,0 +1,134 @@
+classDiagram
+direction TB
+    class EFFControlCenter {
+	    -List~Mission~ Missions
+	    -List~Squad~ Squads
+	    -List~Pilot~ Pilots
+	    -List~MilitaryBase~ Bases
+	    +CreateMission()
+	    +AssignSquadToMission()
+	    +CompleteMission()
+    }
+
+    class Mission {
+	    -string Name
+	    -string description
+	    -MissionStatus Status
+	    -TerrainType terrain
+	    -Squad AssignedSquad
+	    +StartMission()
+	    +CompleteMission()
+    }
+
+    class Squad {
+	    -string Name
+	    -List~MobileUnit~ Units
+	    -const int MaxUnits = 4
+	    +AddUnit()
+	    +RemoveUnit()
+    }
+
+    class Pilot {
+	    -string Name
+	    -MobilteUnit AssignedUnit
+	    +AssignUnit()
+    }
+
+    class MilitaryBase {
+	    -string name
+	    -string location
+	    -List~Squad~ Squads
+    }
+
+    class MobileUnit {
+	    -string Name
+	    -int Health
+	    -int Energy
+	    -bool IsAvailable
+	    +Pilot AssignedPilot
+	    +Deploy()
+    }
+
+    class MobileWeapon {
+	    -List ~Weapon~Loadout
+	    -const int MaxWeapons = 3
+    }
+
+    class MobileArmor {
+	    -Size MobileArmorSize
+	    -int FirePower
+    }
+
+    class MassProduced {
+    }
+
+    class GM {
+    }
+
+    class GunCannon {
+    }
+
+    class AquaGM {
+    }
+
+    class Gundam {
+    }
+
+    class ZetaGundam {
+    }
+
+    class Specialized {
+    }
+
+    class MissionStatus {
+	    Active
+	    InProgress
+	    Completed
+    }
+
+    class TerrainType {
+	    Space
+	    Urban
+	    Forest
+	    Desert
+	    Ocean
+	    Atmosphere
+    }
+
+
+ class IFlyable {
+        <<interface>>
+        +Fly()
+    }
+
+      class IUnderwaterCapable {
+        <<interface>>
+        +OperateUnderwater()
+    }
+
+	<<abstract>> MobileUnit
+	<<abstract>> MobileWeapon
+	<<enumeration>> MissionStatus
+	<<enumeration>> TerrainType
+
+    MobileUnit <|-- MobileArmor
+    MobileUnit <|-- MobileWeapon
+    MobileWeapon <|-- MassProduced
+    MobileWeapon <|-- Specialized
+    EFFControlCenter "1" *-- "*" Mission
+    EFFControlCenter "1" *-- "*" Squad
+    EFFControlCenter "1" o-- "*" Pilot
+    EFFControlCenter "1" o-- "*" MilitaryBase
+    Squad "1" o-- "0..4" MobileUnit
+    MobileUnit "1" --> "0..1" Pilot
+    Mission --> MissionStatus
+    Mission --> TerrainType
+    Mission "0..*" --> "0..1" Squad
+    MilitaryBase "1" o-- "*" Squad
+    Specialized <|-- Gundam
+    Specialized <|-- ZetaGundam
+    MassProduced <|-- GM
+    MassProduced <|-- GunCannon
+    MassProduced <|-- AquaGM
+    IFlyable <|.. ZetaGundam
+    IUnderwaterCapable <|.. AquaGM
