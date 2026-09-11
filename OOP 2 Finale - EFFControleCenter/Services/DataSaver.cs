@@ -14,7 +14,7 @@ namespace OOP_2_Finale___EFFControleCenter.Services
 
             await JsonService.OverwriteJson("weapons.json", controlCenter.Weapons);
 
-            await JsonService.OverwriteJson("pilots.json", controlCenter.Pilots);
+            await PilotJsonService.OverwritePilotsToJson("pilots.json", controlCenter.Pilots);
 
             await UnitJsonService.OverwriteUnitsToJson("units.json", controlCenter.Units);
 

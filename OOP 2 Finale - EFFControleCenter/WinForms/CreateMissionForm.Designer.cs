@@ -40,6 +40,10 @@
             numericDuration = new NumericUpDown();
             btnCreate = new Button();
             btnCancel = new Button();
+            txtLocation = new TextBox();
+            lblLocation = new Label();
+            lblThreat = new Label();
+            comboBoxThreat = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)numericDuration).BeginInit();
             SuspendLayout();
             // 
@@ -75,7 +79,7 @@
             // lblTerrain
             // 
             lblTerrain.AutoSize = true;
-            lblTerrain.Location = new Point(20, 143);
+            lblTerrain.Location = new Point(22, 167);
             lblTerrain.Name = "lblTerrain";
             lblTerrain.Size = new Size(49, 15);
             lblTerrain.TabIndex = 3;
@@ -84,7 +88,7 @@
             // lblDuration
             // 
             lblDuration.AutoSize = true;
-            lblDuration.Location = new Point(20, 171);
+            lblDuration.Location = new Point(21, 224);
             lblDuration.Name = "lblDuration";
             lblDuration.Size = new Size(59, 15);
             lblDuration.TabIndex = 4;
@@ -93,7 +97,7 @@
             // lblSecounds
             // 
             lblSecounds.AutoSize = true;
-            lblSecounds.Location = new Point(211, 171);
+            lblSecounds.Location = new Point(210, 224);
             lblSecounds.Name = "lblSecounds";
             lblSecounds.Size = new Size(51, 15);
             lblSecounds.TabIndex = 5;
@@ -116,14 +120,14 @@
             // comboBoxTerrain
             // 
             comboBoxTerrain.FormattingEnabled = true;
-            comboBoxTerrain.Location = new Point(104, 135);
+            comboBoxTerrain.Location = new Point(104, 164);
             comboBoxTerrain.Name = "comboBoxTerrain";
             comboBoxTerrain.Size = new Size(100, 23);
             comboBoxTerrain.TabIndex = 8;
             // 
             // numericDuration
             // 
-            numericDuration.Location = new Point(104, 164);
+            numericDuration.Location = new Point(104, 222);
             numericDuration.Name = "numericDuration";
             numericDuration.Size = new Size(100, 23);
             numericDuration.TabIndex = 9;
@@ -148,11 +152,48 @@
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
             // 
+            // txtLocation
+            // 
+            txtLocation.Location = new Point(104, 135);
+            txtLocation.Name = "txtLocation";
+            txtLocation.Size = new Size(100, 23);
+            txtLocation.TabIndex = 12;
+            // 
+            // lblLocation
+            // 
+            lblLocation.AutoSize = true;
+            lblLocation.Location = new Point(20, 143);
+            lblLocation.Name = "lblLocation";
+            lblLocation.Size = new Size(56, 15);
+            lblLocation.TabIndex = 13;
+            lblLocation.Text = "Location:";
+            // 
+            // lblThreat
+            // 
+            lblThreat.AutoSize = true;
+            lblThreat.Location = new Point(22, 196);
+            lblThreat.Name = "lblThreat";
+            lblThreat.Size = new Size(68, 15);
+            lblThreat.TabIndex = 14;
+            lblThreat.Text = "Threat level";
+            // 
+            // comboBoxThreat
+            // 
+            comboBoxThreat.FormattingEnabled = true;
+            comboBoxThreat.Location = new Point(104, 193);
+            comboBoxThreat.Name = "comboBoxThreat";
+            comboBoxThreat.Size = new Size(100, 23);
+            comboBoxThreat.TabIndex = 15;
+            // 
             // CreateMissionForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(300, 450);
+            Controls.Add(comboBoxThreat);
+            Controls.Add(lblThreat);
+            Controls.Add(lblLocation);
+            Controls.Add(txtLocation);
             Controls.Add(btnCancel);
             Controls.Add(btnCreate);
             Controls.Add(numericDuration);
@@ -186,5 +227,9 @@
         private NumericUpDown numericDuration;
         private Button btnCreate;
         private Button btnCancel;
+        private TextBox txtLocation;
+        private Label lblLocation;
+        private Label lblThreat;
+        private ComboBox comboBoxThreat;
     }
 }

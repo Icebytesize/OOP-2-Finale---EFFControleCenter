@@ -17,7 +17,9 @@ namespace OOP_2_Finale___EFFControleCenter.Services
                 Description = mission.Description,
                 Terrain = mission.Terrain,
                 MissionStatus = mission.Status,
-                AssignedSquadId = mission.AssignedSquad?.Id
+                AssignedSquadId = mission.AssignedSquad?.Id,
+                Location = mission.Location,
+                ThreatLevel = mission.ThreatLevel
             };
             return data;
         }
@@ -36,7 +38,7 @@ namespace OOP_2_Finale___EFFControleCenter.Services
             List<Mission> missions = new();
             foreach (MissionData data in missionData)
             {
-                Mission mission = new Mission(data.Name, data.Description, data.Terrain, data.Duration)
+                Mission mission = new Mission(data.Name, data.Description, data.Location, data.ThreatLevel ,data.Terrain, data.Duration)
                 {
                     Id = data.Id,
                 };

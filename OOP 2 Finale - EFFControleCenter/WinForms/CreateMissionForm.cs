@@ -22,6 +22,8 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
 
             comboBoxTerrain.DataSource = Enum.GetValues<TerrainType>();
 
+            comboBoxThreat.DataSource = Enum.GetValues<ThreatLevel>();
+
             numericDuration.Minimum = 1;
             numericDuration.Maximum = 3600;
             numericDuration.Value = 30;
@@ -35,7 +37,9 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
 
             if (comboBoxTerrain.SelectedItem is not TerrainType terrain) { MessageBox.Show("Please select a terrain."); return; }
 
-            CreatedMission = new Mission(txtName.Text.Trim(), txtDesc.Text.Trim(), terrain, TimeSpan.FromSeconds((double)numericDuration.Value));
+            if (comboBoxThreat.SelectedItem is not ThreatLevel threatLevel)  { MessageBox.Show("Please select a threat level."); return; }
+
+            CreatedMission = new Mission(txtName.Text.Trim(), txtDesc.Text.Trim(), txtLocation.Text.Trim(), threatLevel , terrain, TimeSpan.FromSeconds((double)numericDuration.Value));
 
             DialogResult = DialogResult.OK;
             Close();

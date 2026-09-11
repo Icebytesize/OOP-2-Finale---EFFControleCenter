@@ -10,6 +10,8 @@ namespace OOP_2_Finale___EFFControleCenter.Models
     {
         public string Name { get; }
         public string Description { get; }
+        public string Location {  get; }
+        public ThreatLevel ThreatLevel { get; }
         public TerrainType Terrain { get; }
         public MissionStatus Status { get; private set; }
         public TimeSpan Duration { get; }
@@ -17,7 +19,7 @@ namespace OOP_2_Finale___EFFControleCenter.Models
         public Squad? AssignedSquad { get; private set; }
         public event Action<Mission>? MissionCompleted;
 
-        public Mission(string name, string description, TerrainType terrain, TimeSpan duration)
+        public Mission(string name, string description,string location, ThreatLevel threatLevel, TerrainType terrain, TimeSpan duration)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -28,7 +30,9 @@ namespace OOP_2_Finale___EFFControleCenter.Models
 
             Name = name;
             Description = description;
+            Location = location;
             Terrain = terrain;
+            ThreatLevel = threatLevel;
             Duration = duration;
             Status = MissionStatus.Pending;
             AssignedSquad = null;
@@ -95,7 +99,9 @@ namespace OOP_2_Finale___EFFControleCenter.Models
             Console.WriteLine($"Mission: {Name}");
             Console.WriteLine($"Description: {Description}");
             Console.WriteLine($"Terrain: {Terrain}");
+            Console.WriteLine($"Location: {Location}");
             Console.WriteLine($"Status: {Status}");
+            Console.WriteLine($"Threat Level: {ThreatLevel}");
             Console.WriteLine($"Duration: {Duration.TotalMinutes} Minuts");
             
             if (AssignedSquad != null)

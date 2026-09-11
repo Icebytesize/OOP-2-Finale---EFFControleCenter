@@ -86,7 +86,7 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
                 MessageBox.Show("A mobile weapon can carry a maximum of 3 weapons.");
                 return;
             }
-            
+
 
             SavePilotAssignment();
             SaveWeaponLoadout();
@@ -108,12 +108,17 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
 
-            if (result == DialogResult.Yes) return;
+            if (result == DialogResult.No) return;
 
             _controlCenter.RemoveUnitById(_unit.Id);
 
             await DataSaver.SaveAllData(_controlCenter);
 
+            Close();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
             Close();
         }
     }

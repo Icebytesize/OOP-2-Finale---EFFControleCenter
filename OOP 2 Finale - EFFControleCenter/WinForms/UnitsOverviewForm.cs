@@ -31,14 +31,17 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
         {
             dataGridViewUnits.DataSource = _controlCenter.Units.Select(unit => new
             {
+                unit.Id,
                 unit.Name,
                 Type = unit.GetType().Name,
                 unit.Health,
                 unit.Energy,
                 unit.IsAvailable,
                 Pilot = unit.AssignedPilot?.Name ?? "none",
-                Squad = unit.AssignedSquad.Name ?? "none"
+                Squad = unit.AssignedSquad?.Name ?? "none" 
             }).ToList();
+
+            dataGridViewUnits.Columns["Id"].Visible = false;
         }
 
         private void btnViewDetails_Click(object sender, EventArgs e)
