@@ -81,6 +81,26 @@ namespace OOP_2_Finale___EFFControleCenter.Models
             return squad;
         }
 
+        public void AssignSquadToMission(Squad squad, Mission mission)
+        {
+            ArgumentNullException.ThrowIfNull(squad);
+            ArgumentNullException.ThrowIfNull(mission);
+
+            if (!_squads.Contains(squad))
+            {
+                throw new InvalidOperationException(
+                    "Squad is not part of the control center.");
+            }
+
+            if (!_missions.Contains(mission))
+            {
+                throw new InvalidOperationException(
+                    "Mission is not part of the control center.");
+            }
+
+            mission.AssignSquad(squad);
+        }
+
         public Weapon? FindWeaponById(int id)
         {
             return _weapons.FirstOrDefault(w => w.Id == id);

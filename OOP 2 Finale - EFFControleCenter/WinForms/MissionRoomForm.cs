@@ -22,7 +22,11 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
 
             LoadMissions();
         }
-
+        private void MissionCompletedLog(Mission mission)
+        {
+            AppLogger.Log(
+                $"Named callback: Mission {mission.Name} completed.");
+        }
         private void LoadMissions()
         {
             dataGridViewMission.DataSource = _controlCenter.Missions.Select(mission => new
@@ -61,18 +65,32 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
                 MessageBox.Show("Mission could not be found."); return;
             }
 
+
+            using SelectSquadForm selectSquadForm = new SelectSquadForm(_controlCenter);
+
+            if (selectSquadForm.ShowDialog() != DialogResult.OK) return;
+
+            Squad? squad = selectSquadForm.SelectedSquad;
+
+            if(squad == null) return;
+
             try
             {
-                Squad assignedSquad = _controlCenter.AssignSquadToMission(mission);
+                _controlCenter.AssignSquadToMission(squad, mission);
 
-                AppLogger.Log($"Squad {assignedSquad.Name} assigned to mission {mission.Name}.");
+                AppLogger.Log($"Squad {squad.Name} assigned to mission {mission.Name}.");
 
+                mission.MissionCompleted += MissionCompletedLog;
+                
                 mission.MissionCompleted += completedMission =>
                 {
-                    AppLogger.Log($"Mission {completedMission.Name} completed.");
+                    AppLogger.Log($"Lambda Callback: Mission {completedMission.Name} completed.");
                 };
 
                 AppLogger.Log($"Mission {mission.Name} started.");
+
+                MissionCountdownForm countdownForm = new MissionCountdownForm(mission);
+                countdownForm.Show();
 
                 await mission.RunMissionAsync();
 

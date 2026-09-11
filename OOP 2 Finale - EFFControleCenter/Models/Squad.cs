@@ -30,8 +30,11 @@ namespace OOP_2_Finale___EFFControleCenter.Models
             _units.Add(unit);
             unit.SetSquad(this);
         }
-       
 
+        public override string ToString()
+        {
+            return Name;
+        }
         public void RemoveUnit(MobileUnit unit)
         {
             ArgumentNullException.ThrowIfNull(unit);
