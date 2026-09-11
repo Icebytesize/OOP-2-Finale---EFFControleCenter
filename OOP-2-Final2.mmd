@@ -1,0 +1,375 @@
+classDiagram
+
+%% =========================
+%% BASE ENTITY
+%% =========================
+
+class Entity {
+    <<abstract>>
+    +int Id
+}
+
+%% =========================
+%% CONTROL CENTER
+%% =========================
+
+class EFFControlCenter {
+    -List~Mission~ _missions
+    -List~Squad~ _squads
+    -List~Pilot~ _pilots
+    -List~MilitaryBase~ _bases
+    -List~Weapon~ _weapons
+    -List~MobileUnit~ _units
+    -IMissionAssignmentStrategy _assignmentStrategy
+
+    +IReadOnlyList~Mission~ Missions
+    +IReadOnlyList~Squad~ Squads
+    +IReadOnlyList~Pilot~ Pilots
+    +IReadOnlyList~MilitaryBase~ Bases
+    +IReadOnlyList~Weapon~ Weapons
+    +IReadOnlyList~MobileUnit~ Units
+
+    +AddMission(Mission)
+    +AddSquad(Squad)
+    +AddPilot(Pilot)
+    +AddBase(MilitaryBase)
+    +AddWeapon(Weapon)
+    +AddUnit(MobileUnit)
+
+    +AssignSquadToMission(Squad, Mission)
+    +AssignSquadToMission(Mission) Squad
+
+    +FindWeaponById(int) Weapon
+    +FindPilotById(int) Pilot
+    +FindUnitById(int) MobileUnit
+    +FindSquadById(int) Squad
+    +FindMissionById(int) Mission
+
+    +RemoveWeaponById(int) bool
+    +RemovePilotById(int) bool
+    +RemoveUnitById(int) bool
+    +RemoveSquadById(int) bool
+}
+
+Entity <|-- EFFControlCenter
+
+%% =========================
+%% MISSION
+%% =========================
+
+class Mission {
+    +string Name
+    +string Description
+    +string Location
+    +TerrainType Terrain
+    +ThreatLevel ThreatLevel
+    +MissionStatus Status
+    +TimeSpan Duration
+    +Squad AssignedSquad
+
+    +AssignSquad(Squad)
+    +StartMission()
+    +CompleteMission()
+    +RunMissionAsync() Task
+    +MissionInfo()
+    ~SetStatus(MissionStatus)
+
+    +Action~Mission~ MissionCompleted
+}
+
+Entity <|-- Mission
+
+class MissionStatus {
+    <<enumeration>>
+    Pending
+    InProgress
+    Completed
+}
+
+class TerrainType {
+    <<enumeration>>
+    Space
+    Urban
+    Forest
+    Desert
+    Ocean
+    Atmosphere
+}
+
+class ThreatLevel {
+    <<enumeration>>
+    Low
+    Medium
+    High
+    Critical
+}
+
+Mission --> MissionStatus
+Mission --> TerrainType
+Mission --> ThreatLevel
+
+%% =========================
+%% SQUAD
+%% =========================
+
+class Squad {
+    +string Name
+    -List~MobileUnit~ _units
+    +IReadOnlyList~MobileUnit~ Units
+    -int MaxUnits
+
+    +AddUnit(MobileUnit)
+    +RemoveUnit(MobileUnit)
+    +IsReadyForMission() bool
+    +DisplaySquadInfo()
+    +DisplaySquadDescription()
+}
+
+Entity <|-- Squad
+
+Mission --> "0..1" Squad : assigned squad
+Squad o-- "0..4" MobileUnit : contains
+
+%% =========================
+%% PILOT
+%% =========================
+
+class Pilot {
+    +string Name
+    +MobileUnit AssignedUnit
+
+    ~AssignUnit(MobileUnit)
+    ~RemoveUnit()
+}
+
+Entity <|-- Pilot
+
+Pilot "0..1" <--> "0..1" MobileUnit : assigned to
+
+%% =========================
+%% WEAPON
+%% =========================
+
+class Weapon {
+    +string Name
+    +int Damage
+    +int EnergyCost
+}
+
+Entity <|-- Weapon
+
+%% =========================
+%% MOBILE UNIT HIERARCHY
+%% =========================
+
+class MobileUnit {
+    <<abstract>>
+
+    +string Name
+    +int Health
+    +int Energy
+    +bool IsAvailable
+    +Pilot AssignedPilot
+    +Squad AssignedSquad
+
+    +AssignPilot(Pilot)
+    +RemovePilot()
+    +Deploy()
+    +GetDescription() string*
+    +GetStatus() string
+    ~SetSquad(Squad)
+}
+
+Entity <|-- MobileUnit
+
+class MobileWeapon {
+    <<abstract>>
+
+    -List~Weapon~ _loadout
+    +IReadOnlyList~Weapon~ Loadout
+
+    +AddWeapon(Weapon)
+    +RemoveWeapon(Weapon)
+}
+
+MobileUnit <|-- MobileWeapon
+MobileWeapon o-- "0..3" Weapon : loadout
+
+class MobileArmor {
+    <<abstract>>
+}
+
+MobileUnit <|-- MobileArmor
+
+class MassProduced {
+    <<abstract>>
+}
+
+class Specialized {
+    <<abstract>>
+}
+
+MobileWeapon <|-- MassProduced
+MobileWeapon <|-- Specialized
+
+%% =========================
+%% CONCRETE MOBILE UNITS
+%% =========================
+
+class GM {
+    +GetDescription() string
+}
+
+class GunCannon {
+    +GetDescription() string
+}
+
+class AquaGM {
+    +GetDescription() string
+    +Dive()
+}
+
+class Gundam {
+    +GetDescription() string
+}
+
+class ZetaGundam {
+    +GetDescription() string
+    +Fly()
+}
+
+MassProduced <|-- GM
+MassProduced <|-- GunCannon
+MassProduced <|-- AquaGM
+
+Specialized <|-- Gundam
+Specialized <|-- ZetaGundam
+
+%% =========================
+%% INTERFACES
+%% =========================
+
+class IFlyable {
+    <<interface>>
+    +Fly()
+}
+
+class IUnderwaterCapable {
+    <<interface>>
+    +Dive()
+}
+
+IFlyable <|.. ZetaGundam
+IUnderwaterCapable <|.. AquaGM
+
+%% =========================
+%% MILITARY BASE
+%% =========================
+
+class MilitaryBase {
+    +string Name
+}
+
+Entity <|-- MilitaryBase
+
+%% =========================
+%% STRATEGY / DEPENDENCY INVERSION
+%% =========================
+
+class IMissionAssignmentStrategy {
+    <<interface>>
+    +SelectSquad(Mission, IEnumerable~Squad~) Squad
+}
+
+class FirstAvailableSquadStrategy {
+    +SelectSquad(Mission, IEnumerable~Squad~) Squad
+}
+
+IMissionAssignmentStrategy <|.. FirstAvailableSquadStrategy
+
+EFFControlCenter --> IMissionAssignmentStrategy : depends on
+
+%% =========================
+%% UTILITIES
+%% =========================
+
+class SearchHelper {
+    <<static>>
+    +Filter~T~(IEnumerable~T~, Func~T,bool~) List~T~
+}
+
+class AppLogger {
+    <<static>>
+    +Action~string~ LogAdded
+    +Log(string)
+}
+
+%% =========================
+%% JSON / DATA SERVICES
+%% =========================
+
+class JsonService {
+    <<static>>
+    +LoadFromJson~T~(string) Task~List~T~~
+    +OverwriteJson~T~(string, IReadOnlyList~T~) Task
+    +AppendToJson~T~(string, IEnumerable~T~) Task
+    +GetNextId~T~(string) Task~int~
+}
+
+class UnitJsonService {
+    <<static>>
+    +LoadUnitsFromJson(...)
+    +AppendUnitsToJson(...)
+    +OverwriteUnitsToJson(...)
+}
+
+class SquadJsonService {
+    <<static>>
+    +LoadSquadsFromJson(...)
+    +AppendSquadsToJson(...)
+    +OverwriteSquadsToJson(...)
+}
+
+class MissionJsonService {
+    <<static>>
+    +LoadMissionsFromJson(...)
+    +AppendMissionsToJson(...)
+    +OverwriteMissionsToJson(...)
+}
+
+class DataLoader {
+    <<static>>
+    +LoadAllData() Task~EFFControlCenter~
+}
+
+class DataSaver {
+    <<static>>
+    +SaveAllData(EFFControlCenter) Task
+}
+
+UnitJsonService ..> JsonService
+SquadJsonService ..> JsonService
+MissionJsonService ..> JsonService
+
+DataLoader ..> JsonService
+DataLoader ..> UnitJsonService
+DataLoader ..> SquadJsonService
+DataLoader ..> MissionJsonService
+DataLoader ..> EFFControlCenter
+
+DataSaver ..> JsonService
+DataSaver ..> UnitJsonService
+DataSaver ..> SquadJsonService
+DataSaver ..> MissionJsonService
+DataSaver ..> EFFControlCenter
+
+%% =========================
+%% CONTROL CENTER AGGREGATION
+%% =========================
+
+EFFControlCenter o-- "*" Mission
+EFFControlCenter o-- "*" Squad
+EFFControlCenter o-- "*" Pilot
+EFFControlCenter o-- "*" Weapon
+EFFControlCenter o-- "*" MobileUnit
+EFFControlCenter o-- "*" MilitaryBase
