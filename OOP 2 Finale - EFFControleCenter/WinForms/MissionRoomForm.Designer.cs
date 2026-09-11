@@ -104,8 +104,8 @@
 
         private Label lblMissionRoom;
         private DataGridView dataGridViewMission;
-        private Button button1;
-        private Button button2;
+        private Button btnStartMission;
+        private Button btnRefresh;
         private Button btnClose;
     }
 }
