@@ -1,4 +1,5 @@
-﻿using OOP_2_Finale___EFFControleCenter.Units;
+﻿using OOP_2_Finale___EFFControleCenter.Interfaces;
+using OOP_2_Finale___EFFControleCenter.Units;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,7 @@ namespace OOP_2_Finale___EFFControleCenter.Models
         private readonly List<MilitaryBase> _bases = new();
         private readonly List<Weapon> _weapons = new();
         private readonly List<MobileUnit> _units = new();
+        private readonly IMissionAssignmentStrategy _assignmentStrategy;
 
 
         public IReadOnlyList<Mission> Missions => _missions;
@@ -26,6 +28,10 @@ namespace OOP_2_Finale___EFFControleCenter.Models
         {
             ArgumentNullException.ThrowIfNull(mission);
             _missions.Add(mission);
+        }
+        public EFFControlCenter(IMissionAssignmentStrategy assignmentStrategy)
+        {
+            _assignmentStrategy = assignmentStrategy;
         }
 
         public void AddSquad(Squad squad)
@@ -58,19 +64,21 @@ namespace OOP_2_Finale___EFFControleCenter.Models
             _units.Add(unit);
         }
 
-        public void AssignSquadToMission(Squad squad, Mission mission)
+        public Squad AssignSquadToMission(Mission mission)
         {
-            ArgumentNullException.ThrowIfNull(squad);
+           
             ArgumentNullException.ThrowIfNull(mission);
-            if (!_squads.Contains(squad))
-            {
-                throw new InvalidOperationException("Squad is not part of the control center.");
-            }
+            
             if (!_missions.Contains(mission))
             {
                 throw new InvalidOperationException("Mission is not part of the control center.");
             }
+
+            Squad squad = _assignmentStrategy.SelectSquad(mission, _squads);
+
             mission.AssignSquad(squad);
+
+            return squad;
         }
 
         public Weapon? FindWeaponById(int id)

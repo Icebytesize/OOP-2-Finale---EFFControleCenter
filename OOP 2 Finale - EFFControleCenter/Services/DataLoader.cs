@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using OOP_2_Finale___EFFControleCenter.Units;
+using System.Net.Http.Headers;
 
 namespace OOP_2_Finale___EFFControleCenter.Services
 {
@@ -10,7 +11,7 @@ namespace OOP_2_Finale___EFFControleCenter.Services
     {
         public static async Task<EFFControlCenter> LoadAllData()
         {
-            EFFControlCenter controlCenter = new EFFControlCenter();
+            EFFControlCenter controlCenter = new EFFControlCenter(new FirstAvailableSquadStrategy());
             // Load weapons
             List<Weapon> weapons = await JsonService.LoadFromJson<Weapon>("weapons.json");
             // Load Pilots

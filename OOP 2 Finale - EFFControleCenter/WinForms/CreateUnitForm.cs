@@ -1,4 +1,5 @@
 ﻿using OOP_2_Finale___EFFControleCenter.Units;
+using OOP_2_Finale___EFFControleCenter.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -56,6 +57,7 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
             CreatedUnit = unit;
 
             DialogResult = DialogResult.OK;
+            AppLogger.Log($"{unit.Name} of {comboBoxUnitType.SelectedItem?.ToString()} Type has been created");
             Close();
         }
 

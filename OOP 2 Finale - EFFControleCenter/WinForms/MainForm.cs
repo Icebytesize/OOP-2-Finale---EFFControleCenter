@@ -2,6 +2,7 @@
 using OOP_2_Finale___EFFControleCenter.Models;
 using OOP_2_Finale___EFFControleCenter.Services;
 using OOP_2_Finale___EFFControleCenter.Units;
+using OOP_2_Finale___EFFControleCenter.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +21,8 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
         {
             InitializeComponent();
 
+            AppLogger.LogAdded += AddLog;
+
             //dataGridViewUnits.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             Load += MainForm_Load;
@@ -30,6 +33,11 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
             _controlCenter = await DataLoader.LoadAllData();
 
             //RefreshUnitsGrid();
+        }
+
+        private void AddLog(string message)
+        {
+            ListLog.Items.Add(message);
         }
 
         /*private void RefreshUnitsGrid()
@@ -204,6 +212,15 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
             using UnitsOverviewForm form = new UnitsOverviewForm(_controlCenter);
 
             form.ShowDialog();
+        }
+
+        private void btnMissionRoom_Click(object sender, EventArgs e)
+        {
+            if (_controlCenter == null) return;
+
+            using MissionRoomForm missionRoom = new MissionRoomForm(_controlCenter);
+
+            missionRoom.ShowDialog();
         }
     }
 }

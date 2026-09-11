@@ -44,6 +44,9 @@
             toolStripViewSquad = new ToolStripMenuItem();
             toolStripViewMission = new ToolStripMenuItem();
             btnView = new Button();
+            ListLog = new ListBox();
+            label1 = new Label();
+            btnMissionRoom = new Button();
             contextMenuStripCreate.SuspendLayout();
             contextMenuStripView.SuspendLayout();
             SuspendLayout();
@@ -116,37 +119,37 @@
             // 
             contextMenuStripView.Items.AddRange(new ToolStripItem[] { toolStripViewUnit, toolStripViewPilot, toolStripViewWeapon, toolStripViewSquad, toolStripViewMission });
             contextMenuStripView.Name = "contextMenuStripView";
-            contextMenuStripView.Size = new Size(181, 136);
+            contextMenuStripView.Size = new Size(119, 114);
             // 
             // toolStripViewUnit
             // 
             toolStripViewUnit.Name = "toolStripViewUnit";
-            toolStripViewUnit.Size = new Size(180, 22);
+            toolStripViewUnit.Size = new Size(118, 22);
             toolStripViewUnit.Text = "Unit";
             toolStripViewUnit.Click += toolStripViewUnit_Click;
             // 
             // toolStripViewPilot
             // 
             toolStripViewPilot.Name = "toolStripViewPilot";
-            toolStripViewPilot.Size = new Size(180, 22);
+            toolStripViewPilot.Size = new Size(118, 22);
             toolStripViewPilot.Text = "Pilot";
             // 
             // toolStripViewWeapon
             // 
             toolStripViewWeapon.Name = "toolStripViewWeapon";
-            toolStripViewWeapon.Size = new Size(180, 22);
+            toolStripViewWeapon.Size = new Size(118, 22);
             toolStripViewWeapon.Text = "Weapon";
             // 
             // toolStripViewSquad
             // 
             toolStripViewSquad.Name = "toolStripViewSquad";
-            toolStripViewSquad.Size = new Size(180, 22);
+            toolStripViewSquad.Size = new Size(118, 22);
             toolStripViewSquad.Text = "Squad";
             // 
             // toolStripViewMission
             // 
             toolStripViewMission.Name = "toolStripViewMission";
-            toolStripViewMission.Size = new Size(180, 22);
+            toolStripViewMission.Size = new Size(118, 22);
             toolStripViewMission.Text = "Mission";
             // 
             // btnView
@@ -159,11 +162,42 @@
             btnView.UseVisualStyleBackColor = true;
             btnView.Click += btnView_Click;
             // 
+            // ListLog
+            // 
+            ListLog.FormattingEnabled = true;
+            ListLog.Location = new Point(569, 164);
+            ListLog.Name = "ListLog";
+            ListLog.Size = new Size(219, 274);
+            ListLog.TabIndex = 4;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F);
+            label1.Location = new Point(666, 133);
+            label1.Name = "label1";
+            label1.Size = new Size(36, 21);
+            label1.TabIndex = 5;
+            label1.Text = "Log";
+            // 
+            // btnMissionRoom
+            // 
+            btnMissionRoom.Location = new Point(283, 131);
+            btnMissionRoom.Name = "btnMissionRoom";
+            btnMissionRoom.Size = new Size(93, 23);
+            btnMissionRoom.TabIndex = 6;
+            btnMissionRoom.Text = "Mission Room";
+            btnMissionRoom.UseVisualStyleBackColor = true;
+            btnMissionRoom.Click += btnMissionRoom_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnMissionRoom);
+            Controls.Add(label1);
+            Controls.Add(ListLog);
             Controls.Add(btnView);
             Controls.Add(lblTitle);
             Controls.Add(btnCreate);
@@ -192,5 +226,8 @@
         private ToolStripMenuItem toolStripViewSquad;
         private ToolStripMenuItem toolStripViewMission;
         private Button btnView;
+        private ListBox ListLog;
+        private Label label1;
+        private Button btnMissionRoom;
     }
 }
