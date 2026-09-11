@@ -1,4 +1,6 @@
 ﻿using OOP_2_Finale___EFFControleCenter.Data;
+using OOP_2_Finale___EFFControleCenter.Enums;
+using OOP_2_Finale___EFFControleCenter.Exceptions;
 using OOP_2_Finale___EFFControleCenter.Models;
 using OOP_2_Finale___EFFControleCenter.Services;
 using OOP_2_Finale___EFFControleCenter.Units;
@@ -221,6 +223,53 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
             MissionRoomForm missionRoom = new MissionRoomForm(_controlCenter);
 
             missionRoom.Show();
+        }
+        private void MissionCompletedLog(Mission mission)
+        {
+            AppLogger.Log(
+                $"Mission {mission.Name} completed.");
+        }
+        private async void btnQuickStart_Click(object sender, EventArgs e)
+        {
+            Mission? mission = _controlCenter.Missions.FirstOrDefault(m => m.Status == MissionStatus.Pending);
+
+            if (mission == null) {MessageBox.Show("No pending missions found."); return;}
+
+            try
+            {
+                
+                Squad squad = _controlCenter.AssignSquadToMission(mission);
+                AppLogger.Log($"Quick Start: Squad {squad.Name} assigned to mission {mission.Name}.");
+
+                mission.MissionCompleted += MissionCompletedLog;
+
+                mission.MissionCompleted += completedMission => {AppLogger.Log($"Mission {completedMission.Name} completed."); };
+
+                MissionCountdownForm countdownForm = new MissionCountdownForm(mission);
+
+                countdownForm.Show();
+
+                await mission.RunMissionAsync();
+
+                await DataSaver.SaveAllData(_controlCenter);
+
+                
+            }
+            catch (SquadNotReadyException ex)
+            {
+                MessageBox.Show(ex.Message);
+                AppLogger.Log(ex.Message);
+            }
+            catch (UnitUnavailableException ex)
+            {
+                MessageBox.Show(ex.Message);
+                AppLogger.Log(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message);
+                AppLogger.Log(ex.Message);
+            }
         }
     }
 }
