@@ -12,6 +12,11 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
     public partial class MissionCountdownForm : Form
     {
         private readonly Mission _mission;
+        private int _animationTimer = 0;
+        private Image _img1;
+        private Image _img2;
+        private Image _imgCompelte;
+        private bool _useFirstImage = true;
 
         private readonly TimeSpan _totalDuration;
         private TimeSpan _remainingTime;
@@ -23,6 +28,15 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
         public MissionCountdownForm(Mission mission)
         {
             InitializeComponent();
+            string imageFolder = Path.Combine(AppContext.BaseDirectory,"Image");
+
+            _img1 = Image.FromFile(Path.Combine(imageFolder, "Gundam1.png"));
+
+            _img2 = Image.FromFile(Path.Combine(imageFolder, "Gundam2.png"));
+
+            _imgCompelte = Image.FromFile(Path.Combine(imageFolder, "GundamComplete.png"));
+
+            pictureBox1.Image = _img1;
 
             _mission = mission;
 
@@ -33,9 +47,9 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
 
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
-            _startX = ClientSize.Width - pictureBox1.Width - 10;
+            _startX =  10;
 
-            _endX = 10;
+            _endX = ClientSize.Width - pictureBox1.Width - 10;
 
             pictureBox1.Left = _startX;
 
@@ -54,15 +68,31 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
         {
             _remainingTime -= TimeSpan.FromMilliseconds(_timer.Interval);
 
+            _animationTimer++;
+
+            if (_animationTimer >= 4)
+            {
+                _useFirstImage = !_useFirstImage;
+                pictureBox1.Image = _useFirstImage ? _img1 : _img2;
+                _animationTimer = 0;
+            }
+
+           
+
             if (_remainingTime <= TimeSpan.Zero)
             {
                 _remainingTime = TimeSpan.Zero;
 
-                pictureBox1.Left = _endX;
+                _timer.Stop();
 
                 label2.Text = "MISSION COMPLETE";
 
-                _timer.Stop();
+                pictureBox1.Image = _imgCompelte;
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
+                pictureBox1.Dock = DockStyle.Fill;
+
+
 
                 return;
             }
@@ -74,7 +104,7 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
 
         private void UpdateCountdown()
         {
-            label2.Text =$"{_remainingTime.Minutes:D2}:{_remainingTime.Seconds:D2}";
+            label2.Text = $"{_remainingTime.Minutes:D2}:{_remainingTime.Seconds:D2}";
         }
 
         private void UpdateGundamPosition()
@@ -92,6 +122,11 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
                 (int)((_endX - _startX) * progress);
 
             pictureBox1.Left = newX;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

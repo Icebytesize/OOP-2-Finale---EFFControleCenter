@@ -1,4 +1,5 @@
-﻿using OOP_2_Finale___EFFControleCenter.Models;
+﻿using OOP_2_Finale___EFFControleCenter.Enums;
+using OOP_2_Finale___EFFControleCenter.Models;
 using OOP_2_Finale___EFFControleCenter.Services;
 using OOP_2_Finale___EFFControleCenter.Utilities;
 using System;
@@ -24,12 +25,14 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
         }
         private void MissionCompletedLog(Mission mission)
         {
-            AppLogger.Log(
-                $"Named callback: Mission {mission.Name} completed.");
+            AppLogger.Log($"Named callback: Mission {mission.Name} completed.");
         }
         private void LoadMissions()
         {
-            dataGridViewMission.DataSource = _controlCenter.Missions.Select(mission => new
+
+            var pendingMissions = SearchHelper.Filter(_controlCenter.Missions, mission => mission.Status == MissionStatus.Pending);
+
+            dataGridViewMission.DataSource = pendingMissions.Select(mission => new
             {
                 mission.Id,
                 mission.Name,
@@ -72,7 +75,7 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
 
             Squad? squad = selectSquadForm.SelectedSquad;
 
-            if(squad == null) return;
+            if (squad == null) return;
 
             try
             {
@@ -81,7 +84,7 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
                 AppLogger.Log($"Squad {squad.Name} assigned to mission {mission.Name}.");
 
                 mission.MissionCompleted += MissionCompletedLog;
-                
+
                 mission.MissionCompleted += completedMission =>
                 {
                     AppLogger.Log($"Lambda Callback: Mission {completedMission.Name} completed.");
@@ -103,6 +106,11 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
                 MessageBox.Show(ex.Message);
                 AppLogger.Log(ex.Message);
             }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadMissions();
         }
     }
 }

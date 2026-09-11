@@ -218,9 +218,9 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
         {
             if (_controlCenter == null) return;
 
-            using MissionRoomForm missionRoom = new MissionRoomForm(_controlCenter);
+            MissionRoomForm missionRoom = new MissionRoomForm(_controlCenter);
 
-            missionRoom.ShowDialog();
+            missionRoom.Show();
         }
     }
 }

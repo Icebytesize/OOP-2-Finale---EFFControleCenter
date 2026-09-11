@@ -30,8 +30,8 @@
         {
             lblMissionRoom = new Label();
             dataGridViewMission = new DataGridView();
-            this.btnStartMission = new Button();
-            this.btnRefresh = new Button();
+            btnStartMission = new Button();
+            btnRefresh = new Button();
             btnClose = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMission).BeginInit();
             SuspendLayout();
@@ -40,44 +40,50 @@
             // 
             lblMissionRoom.AutoSize = true;
             lblMissionRoom.Font = new Font("Segoe UI", 30F);
-            lblMissionRoom.Location = new Point(230, 30);
+            lblMissionRoom.Location = new Point(263, 40);
             lblMissionRoom.Name = "lblMissionRoom";
-            lblMissionRoom.Size = new Size(273, 54);
+            lblMissionRoom.Size = new Size(341, 67);
             lblMissionRoom.TabIndex = 0;
             lblMissionRoom.Text = "Mission Room";
             // 
             // dataGridViewMission
             // 
             dataGridViewMission.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewMission.Location = new Point(12, 87);
+            dataGridViewMission.Location = new Point(14, 116);
+            dataGridViewMission.Margin = new Padding(3, 4, 3, 4);
             dataGridViewMission.Name = "dataGridViewMission";
-            dataGridViewMission.Size = new Size(776, 304);
+            dataGridViewMission.RowHeadersWidth = 51;
+            dataGridViewMission.Size = new Size(887, 405);
             dataGridViewMission.TabIndex = 1;
             // 
             // btnStartMission
             // 
-            this.btnStartMission.Location = new Point(102, 410);
-            this.btnStartMission.Name = "btnStartMission";
-            this.btnStartMission.Size = new Size(85, 23);
-            this.btnStartMission.TabIndex = 2;
-            this.btnStartMission.Text = "Start Mission";
-            this.btnStartMission.UseVisualStyleBackColor = true;
-            this.btnStartMission.Click += this.btnStartMission_Click;
+            btnStartMission.Location = new Point(117, 547);
+            btnStartMission.Margin = new Padding(3, 4, 3, 4);
+            btnStartMission.Name = "btnStartMission";
+            btnStartMission.Size = new Size(97, 31);
+            btnStartMission.TabIndex = 2;
+            btnStartMission.Text = "Start Mission";
+            btnStartMission.UseVisualStyleBackColor = true;
+            btnStartMission.Click += btnStartMission_Click;
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new Point(343, 410);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new Size(75, 23);
-            this.btnRefresh.TabIndex = 3;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Location = new Point(392, 547);
+            btnRefresh.Margin = new Padding(3, 4, 3, 4);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new Size(86, 31);
+            btnRefresh.TabIndex = 3;
+            btnRefresh.Text = "Refresh";
+            btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(612, 410);
+            btnClose.Location = new Point(699, 547);
+            btnClose.Margin = new Padding(3, 4, 3, 4);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(75, 23);
+            btnClose.Size = new Size(86, 31);
             btnClose.TabIndex = 4;
             btnClose.Text = "Close";
             btnClose.UseVisualStyleBackColor = true;
@@ -85,14 +91,15 @@
             // 
             // MissionRoomForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(btnClose);
-            Controls.Add(this.btnRefresh);
-            Controls.Add(this.btnStartMission);
+            Controls.Add(btnRefresh);
+            Controls.Add(btnStartMission);
             Controls.Add(dataGridViewMission);
             Controls.Add(lblMissionRoom);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "MissionRoomForm";
             Text = "MissionRoomForm";
             ((System.ComponentModel.ISupportInitialize)dataGridViewMission).EndInit();

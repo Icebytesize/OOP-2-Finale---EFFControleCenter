@@ -1,5 +1,6 @@
 ﻿using OOP_2_Finale___EFFControleCenter.Enums;
 using OOP_2_Finale___EFFControleCenter.Models;
+using OOP_2_Finale___EFFControleCenter.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,6 +41,8 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
             if (comboBoxThreat.SelectedItem is not ThreatLevel threatLevel)  { MessageBox.Show("Please select a threat level."); return; }
 
             CreatedMission = new Mission(txtName.Text.Trim(), txtDesc.Text.Trim(), txtLocation.Text.Trim(), threatLevel , terrain, TimeSpan.FromSeconds((double)numericDuration.Value));
+
+            AppLogger.Log($"Mission created {CreatedMission.Name}");
 
             DialogResult = DialogResult.OK;
             Close();
