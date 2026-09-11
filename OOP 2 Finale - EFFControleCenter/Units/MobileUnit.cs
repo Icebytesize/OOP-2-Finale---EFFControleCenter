@@ -1,4 +1,5 @@
-﻿using OOP_2_Finale___EFFControleCenter.Models;
+﻿using OOP_2_Finale___EFFControleCenter.Exceptions;
+using OOP_2_Finale___EFFControleCenter.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -84,7 +85,7 @@ namespace OOP_2_Finale___EFFControleCenter.Units
         {
             if(!IsAvailable) 
             {
-                throw new InvalidOperationException("This mobile unit is not available for deployment.");
+                throw new UnitUnavailableException($"{Name} is currently unavailable.");
             }
 
             IsAvailable = false;

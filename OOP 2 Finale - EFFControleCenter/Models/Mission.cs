@@ -1,4 +1,5 @@
 ﻿using OOP_2_Finale___EFFControleCenter.Enums;
+using OOP_2_Finale___EFFControleCenter.Exceptions;
 using OOP_2_Finale___EFFControleCenter.Units;
 using System;
 using System.Collections.Generic;
@@ -59,7 +60,7 @@ namespace OOP_2_Finale___EFFControleCenter.Models
 
             if (!AssignedSquad.IsReadyForMission())
             {
-                throw new InvalidOperationException("Assigned squad is not ready for the mission.");
+                throw new SquadNotReadyException($"{AssignedSquad.Name} is not ready for the mission.");
             }
 
             foreach (var unit in AssignedSquad.Units)

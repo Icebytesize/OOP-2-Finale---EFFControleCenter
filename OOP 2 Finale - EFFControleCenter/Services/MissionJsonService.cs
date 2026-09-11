@@ -19,7 +19,8 @@ namespace OOP_2_Finale___EFFControleCenter.Services
                 MissionStatus = mission.Status,
                 AssignedSquadId = mission.AssignedSquad?.Id,
                 Location = mission.Location,
-                ThreatLevel = mission.ThreatLevel
+                ThreatLevel = mission.ThreatLevel,
+                Duration = mission.Duration
             };
             return data;
         }

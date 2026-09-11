@@ -1,5 +1,6 @@
 ﻿using OOP_2_Finale___EFFControleCenter.Models;
 using OOP_2_Finale___EFFControleCenter.Units;
+using OOP_2_Finale___EFFControleCenter.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,12 +22,11 @@ namespace OOP_2_Finale___EFFControleCenter.WinForms
 
             _controlCenter = controlCenter;
 
-            foreach (MobileUnit unit in _controlCenter.Units)
+            var availableUnits = SearchHelper.Filter(_controlCenter.Units, unit => unit.IsAvailable && unit.AssignedSquad == null);
+
+            foreach (MobileUnit unit in availableUnits)
             {
-                if (unit.AssignedSquad == null && unit.IsAvailable)
-                {
-                    checkedListBoxUnits.Items.Add(unit);
-                }
+                checkedListBoxUnits.Items.Add(unit);
             }
         }
 
